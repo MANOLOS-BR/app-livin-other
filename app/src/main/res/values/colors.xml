@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00ACC1</color>
+    <color name="colorPrimaryDark">#008A9A</color>
+    <color name="colorAccent">#F89FC5</color>
+    <color name="colorAccentDark">#C4B6E7</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="black_overlay">#FFFFFF</color>
+    <color name="dialog_background">#8D424242</color>
+    <color name="dialog_card_background">#70000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="patter_yellow">#FFCC80</color>
+    <color name="dark_grey">#A6A6A6 </color>
+    <color name="profile_text_grey">#808080 </color>
+
+
+
+</resources>
