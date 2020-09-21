@@ -31,7 +31,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             override fun onSuccess(param: Header) {
                 mSharedPreferences.store(TOKEN_AUTH, param.authorization)
                 mSharedPreferences.store(TOKEN_KEY, param.token)
-                RetrofitClient.addHeader(param.token, param.token)
+
+                RetrofitClient.addHeader(param.authorization, param.token)
+
                 mLogin.value = ValidationListener()
             }
 

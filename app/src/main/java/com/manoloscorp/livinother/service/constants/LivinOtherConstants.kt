@@ -12,6 +12,7 @@ class LivinOtherConstants private constructor(){
 
     // Requisições API
     object HEADER {
+        const val NAME_AUTH = "Authorization"
         const val TOKEN_AUTH = "authorization"
         const val TOKEN_KEY = "token"
     }

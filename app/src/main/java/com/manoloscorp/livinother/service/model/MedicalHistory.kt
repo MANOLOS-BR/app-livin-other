@@ -1,14 +1,29 @@
 package com.manoloscorp.livinother.service.model
 
-import java.io.Serializable
+import com.google.gson.annotations.SerializedName
 
-data class MedicalHistory(
-    val alcoholConsumption: Boolean,
-    val communicableDisease: Boolean,
-    val degenerativeDisease: Boolean,
-    val drugAddict: Boolean,
-    val height: Long,
-    val id: Long,
-    val practicePhysicalActivity: Boolean,
-    val weight: Long
-) : Serializable
+
+class MedicalHistory{
+
+    @SerializedName("weight")
+    var weight: Long = 0
+
+    @SerializedName("height")
+    var height: Long = 0
+
+    @SerializedName("drugAddict")
+    var drugAddict: Boolean = false
+
+    @SerializedName("alcoholConsumption")
+    var alcoholConsumption: Boolean = false
+
+    @SerializedName("communicableDisease")
+    var communicableDisease: Boolean = false
+
+    @SerializedName("degenerativeDisease")
+    var degenerativeDisease: Boolean = false
+
+    @SerializedName("practicePhysicalActivity")
+    var practicePhysicalActivity: Boolean = false
+
+}

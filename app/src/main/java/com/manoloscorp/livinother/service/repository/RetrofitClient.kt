@@ -1,5 +1,6 @@
 package com.manoloscorp.livinother.service.repository
 
+import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.NAME_AUTH
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.TOKEN_AUTH
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.TOKEN_KEY
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.RETROFIT.BASE_URL
@@ -7,12 +8,11 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitClient private constructor(){
+class RetrofitClient private constructor() {
 
-    companion object{
+    companion object {
 
         private var mAuthorization = ""
-        private var mToken = ""
 
         private lateinit var mRetrofit: Retrofit
 
@@ -23,13 +23,12 @@ class RetrofitClient private constructor(){
             httpClient.addInterceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader(TOKEN_AUTH, mAuthorization)
-                    .addHeader(TOKEN_KEY, mToken)
+                    .addHeader(NAME_AUTH, mAuthorization)
                     .build()
                 chain.proceed(request)
             }
 
-            if (!Companion::mRetrofit.isInitialized){
+            if (!Companion::mRetrofit.isInitialized) {
                 mRetrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(httpClient.build())
@@ -46,8 +45,7 @@ class RetrofitClient private constructor(){
         }
 
         fun addHeader(authorization: String, token: String) {
-            this.mAuthorization = authorization
-            this.mToken = token
+            this.mAuthorization = "$authorization $token"
         }
 
     }

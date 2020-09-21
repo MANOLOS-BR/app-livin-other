@@ -201,10 +201,33 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="09/06/1993"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/lbl_genre"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/lbl_text_birthday" />
+
+
+                    <TextView
+                        android:id="@+id/lbl_genre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Gênero"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/text_genre"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_date_birthday" />
+
+                    <TextView
+                        android:id="@+id/text_genre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Masculino"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_genre" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -360,7 +383,7 @@
                     android:layout_marginVertical="16dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_button_solid"
-                    android:text="Deslogar"
+                    android:text="Logout"
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
