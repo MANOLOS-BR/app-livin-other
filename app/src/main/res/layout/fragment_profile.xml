@@ -57,7 +57,7 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/lbl_text_user_type"
                     app:layout_constraintEnd_toStartOf="@+id/text_user_email"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -78,6 +78,7 @@
                     app:layout_constraintStart_toEndOf="@+id/lbl_user_name"
                     app:layout_constraintTop_toTopOf="@+id/lbl_user_name" />
 
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,6 +88,57 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/shape_card_profile"
                 android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/lbl_text_user_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Você é um..."
+                    android:layout_marginTop="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/radioGroup_user_type"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_user_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/text_info_access"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_text_user_type">
+
+                    <RadioButton
+                        android:id="@+id/radioButton_donor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_left_selector"
+                        android:button="@color/transparent"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="DOADOR"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton_receiver"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_right_selector"
+                        android:button="@color/transparent"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="RECEPTOR"
+                        android:textColor="@color/dark_grey" />
+                </RadioGroup>
+
 
                 <TextView
                     android:id="@+id/text_info_access"
@@ -99,7 +151,7 @@
                     app:layout_constraintBottom_toTopOf="@id/container_info_access"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/radioGroup_user_type" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/container_info_access"
@@ -200,8 +252,8 @@
                         android:id="@+id/text_date_birthday"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="09/06/1993"
                         android:layout_marginBottom="8dp"
+                        android:text="09/06/1993"
                         app:layout_constraintBottom_toTopOf="@+id/lbl_genre"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -380,12 +432,12 @@
                 <Button
                     android:id="@+id/btn_logout"
                     android:layout_width="match_parent"
-                    android:layout_marginVertical="16dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
                     android:background="@drawable/shape_button_solid"
                     android:text="Logout"
-                    android:textSize="16sp"
                     android:textColor="@color/white"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
