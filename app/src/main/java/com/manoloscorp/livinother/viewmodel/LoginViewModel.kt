@@ -29,8 +29,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val bodyAuth = Authentication(username, password)
         mAuthRepository.login(bodyAuth, object : ApiListener<Header>{
             override fun onSuccess(param: Header) {
-                mSharedPreferences.store(TOKEN_AUTH, param.authorization)
-                mSharedPreferences.store(TOKEN_KEY, param.token)
+                mSharedPreferences.storeString(TOKEN_AUTH, param.authorization)
+                mSharedPreferences.storeString(TOKEN_KEY, param.token)
 
                 RetrofitClient.addHeader(param.authorization, param.token)
 
@@ -49,8 +49,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun verifyLoggedUser() {
 
-        val authorization = mSharedPreferences.get(TOKEN_AUTH)
-        val token = mSharedPreferences.get(TOKEN_KEY)
+        val authorization = mSharedPreferences.getString(TOKEN_AUTH)
+        val token = mSharedPreferences.getString(TOKEN_KEY)
 
         RetrofitClient.addHeader(authorization, token)
         val logged = (authorization != "" && token != "")

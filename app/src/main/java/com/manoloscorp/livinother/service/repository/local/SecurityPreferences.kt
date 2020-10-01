@@ -9,16 +9,27 @@ class SecurityPreferences(context: Context) {
     private val mPreferences: SharedPreferences =
         context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
 
-    fun store(key: String, value: String) {
+    fun storeString(key: String, value: String) {
         mPreferences.edit().putString(key, value).apply()
+    }
+
+
+    fun storeDouble(key: String, value: Double) {
+        mPreferences.edit().putLong(key, java.lang.Double.doubleToRawLongBits(value));
     }
 
     fun remove(key: String) {
         mPreferences.edit().remove(key).apply()
     }
 
-    fun get(key: String): String {
+    fun getString(key: String): String {
         return mPreferences.getString(key, "") ?: ""
+    }
+
+    fun getDouble(key: String?, defaultValue: Double): Double {
+        return java.lang.Double.longBitsToDouble(mPreferences.getLong(key,java.lang.Double.doubleToLongBits(defaultValue)
+            )
+        )
     }
 
 }

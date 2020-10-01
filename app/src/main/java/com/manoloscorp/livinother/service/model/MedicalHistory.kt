@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName
 class MedicalHistory{
 
     @SerializedName("weight")
-    var weight: Long = 0
+    var weight: Double = 0.0
 
     @SerializedName("height")
-    var height: Long = 0
+    var height: Double = 0.0
 
     @SerializedName("drugAddict")
     var drugAddict: Boolean = false

@@ -112,9 +112,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             radioButton_receiver.isChecked = true
             onRadioButtonClicked(radioButton_receiver)
         }
-
     }
-
 
     override fun onClick(view: View) {
         if (view.id == R.id.radioButton_donor) {
