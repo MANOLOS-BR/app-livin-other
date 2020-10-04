@@ -28,7 +28,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         setListeners()
         observe()
 
-
         // Verifica se usuário está logado
         verifyLoggedUser()
 
@@ -38,7 +37,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
         if (view.id == R.id.button_login) {
             progressDialog.show(this,"Aguarde...")
             handleLogin()
-        }else if(view.id == R.id.container_register){
+        }else if(view.id == R.id.text_new_account || view.id == R.id.text_register){
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
@@ -81,8 +80,8 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
      */
     private fun setListeners() {
         button_login.setOnClickListener(this)
+        text_new_account.setOnClickListener(this)
         text_register.setOnClickListener(this)
-        container_register.setOnClickListener(this)
     }
 
     /**

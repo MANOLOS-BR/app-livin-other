@@ -63,7 +63,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     }
             }
         }
-
     }
 
     private fun observe() {

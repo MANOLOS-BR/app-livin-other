@@ -19,10 +19,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Cadastro"
         android:layout_marginLeft="4dp"
+        android:text="Cadastro"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/back_arrow"
@@ -30,168 +31,214 @@
         app:layout_constraintStart_toEndOf="@+id/back_arrow"
         app:layout_constraintTop_toTopOf="@+id/back_arrow" />
 
-
-    <TextView
-        android:id="@+id/lbl_user_type"
+    <ScrollView
+        android:id="@+id/containerFields"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:padding="16dp"
-        android:text="Você é um..."
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup_user_type"
-        app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup_user_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_info_access"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_user_type">
-
-        <RadioButton
-            android:id="@+id/radioButton_donor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/radio_button_left_selector"
-            android:button="@color/transparent"
-            android:checked="true"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="DOADOR"
-            android:textColor="@color/white" />
-
-        <RadioButton
-            android:id="@+id/radioButton_receiver"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/radio_button_right_selector"
-            android:button="@color/transparent"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="RECEPTOR"
-            android:textColor="@color/dark_grey" />
-    </RadioGroup>
-
-
-    <TextView
-        android:id="@+id/lbl_eatingHabit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Hábito Alimentar"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup_user_type"
-        tools:layout_editor_absoluteX="4dp" />
-
-
-    <Spinner
-        android:id="@+id/dropdown_eatingHabit"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lbl_eatingHabit" />
-
-    <TextView
-        android:id="@+id/lbl_info_social_clinic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:button="@drawable/shape_checkbox"
-        android:padding="16dp"
-        android:text="Informações sociais e clinicas"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/dropdown_eatingHabit" />
-
-    <CheckBox
-        android:id="@+id/checkBox_chemicalAddict"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:button="@drawable/shape_checkbox"
-        android:padding="8dp"
-        android:text="Dependente quimico"
-        android:textColor="@color/white"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/lbl_info_social_clinic" />
-
-    <CheckBox
-        android:id="@+id/checkBox_alcoholic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:button="@drawable/shape_checkbox"
-        android:padding="8dp"
-        android:text="Consome bebidas alcoólicas"
-        android:textColor="@color/white"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/checkBox_chemicalAddict" />
-
-    <CheckBox
-        android:id="@+id/checkBox_communicableDiseases"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:button="@drawable/shape_checkbox"
-        android:padding="8dp"
-        android:text="Doenças transmissíveis"
-        android:textColor="@color/white"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/checkBox_alcoholic" />
-
-    <CheckBox
-        android:id="@+id/checkBox_degenerativeDiseases"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:button="@drawable/shape_checkbox"
-        android:padding="8dp"
-        android:text="Doenças degenerativas"
-        android:textColor="@color/white"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/checkBox_communicableDiseases" />
-
-    <CheckBox
-        android:id="@+id/checkBox_practicePhysicalActivities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:button="@drawable/shape_checkbox"
-        android:padding="8dp"
-        android:text="Prática de atividades físicas"
-        android:textColor="@color/white"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/button_next"
-        app:layout_constraintTop_toBottomOf="@id/checkBox_degenerativeDiseases" />
-
-    <Button
-        android:id="@+id/button_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/shape_button_solid"
-        android:text="AVANCAR"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbl_user_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:text="Você é um..."
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/radioGroup_user_type"
+                app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup_user_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/text_info_access"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_user_type">
+
+                <RadioButton
+                    android:id="@+id/radioButton_donor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_left_selector"
+                    android:button="@color/transparent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="DOADOR"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/radioButton_receiver"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_right_selector"
+                    android:button="@color/transparent"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="RECEPTOR"
+                    android:textColor="@color/dark_grey" />
+            </RadioGroup>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/lbl_eatingHabit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="Hábito Alimentar"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/dropdown_eatingHabit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/dropdown_eatingHabit"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/shape_spinner"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lbl_eatingHabit" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/dropdown_eatingHabit"
+                    app:layout_constraintEnd_toEndOf="@+id/dropdown_eatingHabit"
+                    app:layout_constraintTop_toTopOf="@+id/dropdown_eatingHabit" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/lbl_info_social_clinic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:button="@drawable/shape_checkbox"
+                android:paddingHorizontal="16dp"
+                android:text="Informações sociais e clinicas"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/dropdown_eatingHabit" />
+
+            <CheckBox
+                android:id="@+id/checkBox_chemicalAddict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:button="@drawable/shape_checkbox"
+                android:padding="8dp"
+                android:text="Dependente quimico"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/lbl_info_social_clinic" />
+
+            <CheckBox
+                android:id="@+id/checkBox_alcoholic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:button="@drawable/shape_checkbox"
+                android:padding="8dp"
+                android:text="Consome bebidas alcoólicas"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/checkBox_chemicalAddict" />
+
+            <CheckBox
+                android:id="@+id/checkBox_communicableDiseases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:button="@drawable/shape_checkbox"
+                android:padding="8dp"
+                android:text="Doenças transmissíveis"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/checkBox_alcoholic" />
+
+            <CheckBox
+                android:id="@+id/checkBox_degenerativeDiseases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:button="@drawable/shape_checkbox"
+                android:padding="8dp"
+                android:text="Doenças degenerativas"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/checkBox_communicableDiseases" />
+
+            <CheckBox
+                android:id="@+id/checkBox_practicePhysicalActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
+                android:button="@drawable/shape_checkbox"
+                android:padding="8dp"
+                android:text="Prática de atividades físicas"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/button_next"
+                app:layout_constraintTop_toBottomOf="@id/checkBox_degenerativeDiseases" />
+
+            <Button
+                android:id="@+id/button_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/shape_button_solid"
+                android:text="FINALIZAR"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

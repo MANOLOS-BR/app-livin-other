@@ -11,7 +11,7 @@ interface AuthService {
 
     @POST("/api/authentication/login")
     fun auth(
-        @Body body: Authentication):
-            Call<Header>
+        @Body body: Authentication
+    ): Call<Header>
 
 }

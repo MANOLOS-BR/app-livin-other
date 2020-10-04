@@ -9,9 +9,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.RelativeLayout
 import androidx.core.content.res.ResourcesCompat
 import com.manoloscorp.livinother.R
 import kotlinx.android.synthetic.main.progress_dialog_view.view.*

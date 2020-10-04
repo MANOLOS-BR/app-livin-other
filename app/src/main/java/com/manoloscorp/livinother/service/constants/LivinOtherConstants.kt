@@ -40,6 +40,7 @@ class LivinOtherConstants private constructor(){
 
     object HTTP {
         const val SUCCESS = 200
+        const val CREATED = 201
     }
 
     object RETROFIT {

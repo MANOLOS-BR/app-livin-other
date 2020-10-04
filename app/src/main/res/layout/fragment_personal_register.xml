@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
@@ -17,10 +18,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Cadastro"
         android:layout_marginLeft="4dp"
+        android:text="Cadastro"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/back_arrow"
@@ -28,109 +30,143 @@
         app:layout_constraintStart_toEndOf="@+id/back_arrow"
         app:layout_constraintTop_toTopOf="@+id/back_arrow" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_birthday"
+
+    <ScrollView
+        android:id="@+id/containerFields"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColorHint="@color/white"
-        app:hintTextAppearance="@style/MyHintStyle"
-        app:layout_constraintBottom_toTopOf="@+id/text_input_layout_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_arrow"
-        app:layout_constraintVertical_chainStyle="packed">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_edit_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Data Nascimento"
-            android:inputType="date"
-            android:textColor="@color/white"
-            android:theme="@style/MyEditText" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_height"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColorHint="@color/white"
-        app:hintTextAppearance="@style/MyHintStyle"
-        app:layout_constraintBottom_toTopOf="@+id/text_input_layout_weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_birthday">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_edit_height"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Altura"
-            android:inputType="numberDecimal"
-            android:textColor="@color/white"
-            android:theme="@style/MyEditText" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout_weight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColorHint="@color/white"
-        app:hintTextAppearance="@style/MyHintStyle"
-        app:layout_constraintBottom_toTopOf="@+id/text_genre"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_height">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_edit_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Peso"
-            android:inputType="numberDecimal"
-            android:textColor="@color/white"
-            android:theme="@style/MyEditText" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/text_genre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gênero"
-        android:padding="16dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/dropdownGenre"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_weight" />
-
-    <Spinner
-        android:id="@+id/dropdownGenre"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:spinnerMode="dropdown"
-        android:layout_marginStart="16dp"
-        android:background="@color/white"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_next"
-        app:layout_constraintTop_toBottomOf="@+id/text_genre" />
-
-    <Button
-        android:id="@+id/button_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/shape_button_solid"
-        android:text="AVANCAR"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textColorHint="@color/white"
+                app:hintTextAppearance="@style/MyHintStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_edit_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Data Nascimento"
+                    android:inputType="date"
+                    android:textColor="@color/white"
+                    android:theme="@style/MyEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textColorHint="@color/white"
+                app:hintTextAppearance="@style/MyHintStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_edit_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Altura"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/white"
+                    android:theme="@style/MyEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColorHint="@color/white"
+                app:hintTextAppearance="@style/MyHintStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_edit_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Peso"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/white"
+                    android:theme="@style/MyEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Gênero"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/dropdownGenre"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/shape_spinner"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_genre" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/dropdownGenre"
+                    app:layout_constraintEnd_toEndOf="@+id/dropdownGenre"
+                    app:layout_constraintTop_toTopOf="@+id/dropdownGenre"
+                    app:layout_constraintVertical_bias="0.437" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <Button
+                android:id="@+id/button_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/shape_button_solid"
+                android:text="AVANCAR"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerFields" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
