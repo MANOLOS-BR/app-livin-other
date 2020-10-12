@@ -7,13 +7,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.manoloscorp.livinother.MainActivity
 import com.manoloscorp.livinother.R
+import com.manoloscorp.livinother.service.repository.local.SecurityPreferences
 import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() , View.OnClickListener {
+class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mViewModel: LoginViewModel
     private val progressDialog = CustomProgressDialog()
@@ -21,6 +21,12 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // launch the onboarding screen if it is the first launch of the app
+        if (isFirstLaunch()) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+        }
 
         mViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
@@ -33,11 +39,15 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener {
 
     }
 
+    private fun isFirstLaunch(): Boolean {
+        return SecurityPreferences(applicationContext).isFirstLaunch()
+    }
+
     override fun onClick(view: View) {
         if (view.id == R.id.button_login) {
-            progressDialog.show(this,"Aguarde...")
+            progressDialog.show(this, "Aguarde...")
             handleLogin()
-        }else if(view.id == R.id.text_new_account || view.id == R.id.text_register){
+        } else if (view.id == R.id.text_new_account || view.id == R.id.text_register) {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }

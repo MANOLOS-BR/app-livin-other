@@ -34,4 +34,23 @@
         <item>Outros</item>
     </string-array>
 
+
+    <string name="onboarding_slide1_title">Crie sua conta</string>
+    <string name="onboarding_slide1_subtitle">Seja doador</string>
+    <string name="onboarding_slide1_desc">Transforme o dia de alguém com todo amor e solidariedade.</string>
+
+    <string name="onboarding_slide2_title">Crie sua conta</string>
+    <string name="onboarding_slide2_subtitle">Seja doador</string>
+    <string name="onboarding_slide2_desc">A medida da vida não é a sua duração, mas a sua doação.</string>
+
+    <string name="onboarding_slide3_title">Crie sua conta</string>
+    <string name="onboarding_slide3_subtitle">Seja doador</string>
+    <string name="onboarding_slide3_desc">A vida do próximo é mais importante
+que vários Likes. Doe órgãos.</string>
+
+    <string name="next">Próximo</string>
+    <string name="skip">Pular</string>
+    <string name="get_started">Começar</string>
+
+
 </resources>
