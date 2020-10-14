@@ -16,14 +16,14 @@ class RetrofitClient private constructor() {
 
         private lateinit var mRetrofit: Retrofit
 
-        fun getRetrofitInstance(): Retrofit {
+        private fun getRetrofitInstance(): Retrofit {
 
             val httpClient = OkHttpClient.Builder()
 
             httpClient.addInterceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-//                    .addHeader(NAME_AUTH, mAuthorization)
+                    .addHeader(NAME_AUTH, mAuthorization)
                     .build()
                 chain.proceed(request)
             }
@@ -44,8 +44,8 @@ class RetrofitClient private constructor() {
             return getRetrofitInstance().create(serviceClass)
         }
 
-        fun addHeader(authorization: String, token: String) {
-            this.mAuthorization = "$authorization $token"
+        fun addHeader(token: String) {
+            this.mAuthorization = token
         }
 
     }

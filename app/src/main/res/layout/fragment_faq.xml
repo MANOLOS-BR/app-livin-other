@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:text="SAIBA\nMAIS\nSOBRE A\nDOAÇÃO DE\nÓRGÃOS"
+        android:text="@string/text_title_faq"
         android:textAlignment="textEnd"
         android:textColor="@color/white"
         android:textSize="28sp"

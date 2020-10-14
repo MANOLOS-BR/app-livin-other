@@ -26,8 +26,9 @@ class FaqRepository(val context: Context) {
 
             override fun onResponse(call: Call<List<Faq>>, response: Response<List<Faq>>) {
                 if (response.code() != LivinOtherConstants.HTTP.SUCCESS) {
-                    val validation = Gson().fromJson(response.errorBody()?.string(), String::class.java)
-                    listener.onFailure(validation)
+//                    val validation = Gson().fromJson(response.errorBody()?.string(), String::class.java)
+//                    listener.onFailure(validation)
+                    listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
                 } else {
                     response.body()?.let { listener.onSuccess(it) }
                 }

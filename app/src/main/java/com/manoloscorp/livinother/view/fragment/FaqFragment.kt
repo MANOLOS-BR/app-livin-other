@@ -13,12 +13,16 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.listener.FaqListener
 import com.manoloscorp.livinother.view.adapter.FaqAdapter
+import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.FaqViewModel
 
 class FaqFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mViewModel: FaqViewModel
     private val mAdapter = FaqAdapter()
+
+    private val progressDialog = CustomProgressDialog()
+
     private lateinit var mListener: FaqListener
 
     override fun onCreateView(
@@ -35,6 +39,7 @@ class FaqFragment : Fragment(), View.OnClickListener {
 
         observe()
 
+        progressDialog.show(context, "Aguarde...")
         mViewModel.getAllFaqs()
 
         return root
@@ -51,6 +56,7 @@ class FaqFragment : Fragment(), View.OnClickListener {
             if (it != null && it.count() > 0) {
                 mAdapter.updateListener(it)
             }
+            progressDialog.dialog.dismiss()
         })
 
         mViewModel.validation.observe(viewLifecycleOwner, Observer {
@@ -58,7 +64,6 @@ class FaqFragment : Fragment(), View.OnClickListener {
         })
 
     }
-
 
     override fun onClick(view: View) {
 

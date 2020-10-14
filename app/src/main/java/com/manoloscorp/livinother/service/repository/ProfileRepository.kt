@@ -25,8 +25,9 @@ class ProfileRepository(val context: Context) : BaseRepository(context) {
 
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 if (response.code() != LivinOtherConstants.HTTP.SUCCESS){
-                    val validation = Gson().fromJson(response.errorBody()!!.string(), String::class.java)
-                    listener.onFailure(validation)
+//                    val validation = Gson().fromJson(response.errorBody()?.string(), String::class.java)
+//                    listener.onFailure(validation)
+                    listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
                 }else{
                     response.body()?.let { listener.onSuccess(it) }
                 }
