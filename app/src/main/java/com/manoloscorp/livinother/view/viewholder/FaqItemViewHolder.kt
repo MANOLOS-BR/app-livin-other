@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.manoloscorp.livinother.R
-import com.manoloscorp.livinother.service.listener.FaqListener
 import com.manoloscorp.livinother.service.model.Faq
 
 

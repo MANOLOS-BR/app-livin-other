@@ -2,7 +2,6 @@ package com.manoloscorp.livinother.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.listener.FaqListener
