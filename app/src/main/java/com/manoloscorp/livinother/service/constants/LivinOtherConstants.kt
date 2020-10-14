@@ -9,7 +9,7 @@ class LivinOtherConstants private constructor() {
     // SharedPreferences
     object SHARED {
         const val SHARED_NAME = "livinOtherShared"
-        const val TOKEN_AUTH = "authorization"
+        const val TOKEN_USER = "authorization"
         const val TOKEN_KEY = "token"
     }
 

@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.manoloscorp.livinother.service.constants.LivinOtherConstants.SHARED.TOKEN_AUTH
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.SHARED.TOKEN_KEY
+import com.manoloscorp.livinother.service.constants.LivinOtherConstants.SHARED.TOKEN_USER
 import com.manoloscorp.livinother.service.listener.ApiListener
 import com.manoloscorp.livinother.service.listener.ValidationListener
 import com.manoloscorp.livinother.service.model.Authentication
@@ -29,7 +29,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val bodyAuth = Authentication(username, password)
         mAuthRepository.login(bodyAuth, object : ApiListener<Header>{
             override fun onSuccess(param: Header) {
-//                mSharedPreferences.storeString(TOKEN_AUTH, param.authorization)
+                mSharedPreferences.storeString(TOKEN_USER, param.user.toString())
                 mSharedPreferences.storeString(TOKEN_KEY, param.token)
 
                 RetrofitClient.addHeader(param.token)

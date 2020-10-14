@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import com.manoloscorp.livinother.service.listener.ApiListener
 import com.manoloscorp.livinother.service.listener.ValidationListener
 import com.manoloscorp.livinother.service.model.Faq
-import com.manoloscorp.livinother.service.model.Profile
 import com.manoloscorp.livinother.service.repository.FaqRepository
 
 class FaqViewModel(application: Application) : AndroidViewModel(application) {
@@ -21,7 +20,6 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
     var validation: LiveData<ValidationListener> = mValidationListener
 
     fun getAllFaqs() {
-
         mFaqRepository.getAllFaqs(object : ApiListener<List<Faq>> {
             override fun onSuccess(param: List<Faq>) {
                 mFaq.value = param
@@ -30,9 +28,7 @@ class FaqViewModel(application: Application) : AndroidViewModel(application) {
             override fun onFailure(msg: String) {
                 mValidationListener.value = ValidationListener(msg)
             }
-
         })
-
     }
 
 }

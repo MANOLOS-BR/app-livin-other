@@ -4,14 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.manoloscorp.livinother.service.constants.LivinOtherConstants
 import com.manoloscorp.livinother.service.listener.ApiListener
 import com.manoloscorp.livinother.service.listener.ValidationListener
 import com.manoloscorp.livinother.service.model.Profile
 import com.manoloscorp.livinother.service.repository.ProfileRepository
+import com.manoloscorp.livinother.service.repository.local.SecurityPreferences
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mProfileRepository = ProfileRepository(application)
+    private val mSharedPreferences = SecurityPreferences(application)
+
+    private val mIdUser = MutableLiveData<Long>()
+    var idUser: LiveData<Long> = mIdUser
 
     private val mProfile = MutableLiveData<Profile>()
     var profile: LiveData<Profile> = mProfile
@@ -19,7 +25,13 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val mValidationListener = MutableLiveData<ValidationListener>()
     var validation: LiveData<ValidationListener> = mValidationListener
 
-    fun getProfile(id: Int){
+
+    fun getUserId(){
+        val id = mSharedPreferences.getString(LivinOtherConstants.SHARED.TOKEN_USER).toLong() ?: 0
+        mIdUser.value = id
+    }
+
+    fun getProfile(id: Long){
         mProfileRepository.getProfile(id, object : ApiListener<Profile>{
             override fun onSuccess(param: Profile) {
                 mProfile.value = param

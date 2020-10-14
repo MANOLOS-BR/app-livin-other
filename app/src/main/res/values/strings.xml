@@ -57,6 +57,7 @@
     <string name="skip">Pular</string>
     <string name="get_started">Começar</string>
     <string name="text_title_faq">SAIBA\nMAIS\nSOBRE\nDOAÇÃO DE\nÓRGÃOS</string>
+    <string name="default_name">User</string>
 
 
 </resources>

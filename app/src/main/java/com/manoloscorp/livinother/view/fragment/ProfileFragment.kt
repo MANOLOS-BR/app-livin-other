@@ -1,7 +1,6 @@
 package com.manoloscorp.livinother.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.model.Profile
 import com.manoloscorp.livinother.viewmodel.ProfileViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(), View.OnClickListener {
@@ -32,7 +30,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
         observe()
 
-        mViewModel.getProfile(1)
+        mViewModel.getUserId()
 
         return root
     }
@@ -53,7 +51,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 R.id.radioButton_donor ->
                     if (checked) {
                         radioButton_donor.setTextColor(resources.getColor(R.color.white, null))
-                        radioButton_receiver.setTextColor(resources.getColor(R.color.dark_grey,null)
+                        radioButton_receiver.setTextColor(
+                            resources.getColor(R.color.dark_grey, null)
                         )
                     }
                 R.id.radioButton_receiver ->
@@ -66,6 +65,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun observe() {
+
+        mViewModel.idUser.observe(viewLifecycleOwner, Observer {
+            if (it != null && it > 0) {
+                mViewModel.getProfile(it)
+            }
+        })
+
         mViewModel.profile.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 setProfileValues(it)
@@ -84,14 +90,20 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         text_date_birthday.text = profile.dataNascimento
         text_genre.text = profile.genre
         setProfileType(profile.userType)
-        text_weight.text = profile.medicalHistory.weight.toString()
-        text_height.text = profile.medicalHistory.height.toString()
+
+        text_weight.text = formatWeight(profile.medicalHistory.weight.toString())
+        text_height.text = formatHeight(profile.medicalHistory.height.toString())
+
         checkbox_chemical_addict.isChecked = profile.medicalHistory.drugAddict
         checkbox_alcoholic.isChecked = profile.medicalHistory.alcoholConsumption
         checkbox_communicable_diseases.isChecked = profile.medicalHistory.communicableDisease
         checkbox_degenerative_diseases.isChecked = profile.medicalHistory.degenerativeDisease
-        checkbox_practice_physical_activities.isChecked = profile.medicalHistory.practicePhysicalActivity
+        checkbox_practice_physical_activities.isChecked =
+            profile.medicalHistory.practicePhysicalActivity
     }
+
+    private fun formatWeight(value: String): String = "$value kg"
+    private fun formatHeight(value: String): String = "$value m"
 
     /**
      * Inicializa os eventos de click
@@ -101,23 +113,25 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         radioButton_donor.setOnClickListener(this)
         radioButton_receiver.setOnClickListener(this)
         btn_logout.setOnClickListener(this)
+        removeClick()
     }
 
-    private fun setProfileType(value: String){
-        if (value == "DOADOR"){
+    private fun setProfileType(value: String) {
+        if (value == "DOADOR") {
             radioButton_donor.isChecked = true
             onRadioButtonClicked(radioButton_donor)
-        }else{
+        } else {
             radioButton_receiver.isChecked = true
             onRadioButtonClicked(radioButton_receiver)
         }
     }
 
     override fun onClick(view: View) {
-        if (view.id == R.id.radioButton_donor) {
-            onRadioButtonClicked(view)
-        } else if (view.id == R.id.radioButton_receiver) {
-            onRadioButtonClicked(view)
-        }
+
+    }
+
+    private fun removeClick() {
+        radioButton_donor.isClickable = false
+        radioButton_donor.isClickable = false
     }
 }

@@ -10,7 +10,7 @@ interface ProfileService {
 
     @GET("/api/profile/{id}")
     fun getId(
-        @Path(value = "id", encoded = true) id: Int
+        @Path(value = "id", encoded = true) id: Long
     ): Call<Profile>
 
     @PUT
