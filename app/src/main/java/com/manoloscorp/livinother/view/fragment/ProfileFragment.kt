@@ -32,7 +32,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
         observe()
 
-        mViewModel.getProfile(2)
+        mViewModel.getProfile(1)
 
         return root
     }

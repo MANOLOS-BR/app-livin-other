@@ -23,7 +23,7 @@ class RetrofitClient private constructor() {
             httpClient.addInterceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader(NAME_AUTH, mAuthorization)
+//                    .addHeader(NAME_AUTH, mAuthorization)
                     .build()
                 chain.proceed(request)
             }

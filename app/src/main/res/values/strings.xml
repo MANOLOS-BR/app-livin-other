@@ -2,6 +2,7 @@
     <string name="app_name">Livin Other</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="title_faq">Faq</string>
     <string name="title_profile">Perfil</string>
 
     <string name="email">E-mail</string>
@@ -36,17 +37,21 @@
 
 
     <string name="onboarding_slide1_title">Crie sua conta</string>
-    <string name="onboarding_slide1_subtitle">Seja doador</string>
-    <string name="onboarding_slide1_desc">Transforme o dia de alguém com todo amor e solidariedade.</string>
+    <string name="onboarding_slide1_subtitle">seja um doador</string>
+    <string name="onboarding_slide1_article_one">PARA SER DOADOR É PRECISO COMUNICAR À FAMÍLIA</string>
+    <string name="onboarding_slide1_article_two">pois somente os parentes podem autorizar a doação.</string>
 
     <string name="onboarding_slide2_title">Crie sua conta</string>
-    <string name="onboarding_slide2_subtitle">Seja doador</string>
-    <string name="onboarding_slide2_desc">A medida da vida não é a sua duração, mas a sua doação.</string>
+    <string name="onboarding_slide2_subtitle">salve vidas</string>
+    <string name="onboarding_slide2_article_one">UM DOADOR</string>
+    <string name="onboarding_slide2_article_two">após a constatação de morte encefálica</string>
+    <string name="onboarding_slide2_article_three">É CAPAZ DE SALVAR MAIS DE VINTE PESSOAS</string>
 
-    <string name="onboarding_slide3_title">Crie sua conta</string>
-    <string name="onboarding_slide3_subtitle">Seja doador</string>
-    <string name="onboarding_slide3_desc">A vida do próximo é mais importante
-que vários Likes. Doe órgãos.</string>
+    <string name="onboarding_slide3_title"></string>
+    <string name="onboarding_slide3_subtitle">#DOEORGÃOS</string>
+    <string name="onboarding_slide3_article_one">Para salvar vidas, no plural mesmo.</string>
+    <string name="onboarding_slide3_article_two">Um único doador pode salvar a vida de até 8 pessoas.</string>
+    <string name="onboarding_slide3_article_three">Ser um doador de órgãos é um ato de amor e solidariedade.</string>
 
     <string name="next">Próximo</string>
     <string name="skip">Pular</string>

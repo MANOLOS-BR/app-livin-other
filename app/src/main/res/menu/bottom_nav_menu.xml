@@ -12,6 +12,11 @@
         android:title="@string/title_dashboard" />
 
     <item
+        android:id="@+id/navigation_faq"
+        android:icon="@drawable/ic_baseline_question_answer_24"
+        android:title="@string/title_faq" />
+
+    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_round_person"
         android:title="@string/title_profile" />
