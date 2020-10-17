@@ -10,10 +10,10 @@ class Profile {
     @SerializedName("email")
     var email: String = ""
 
-    @SerializedName("dataNascimento")
-    var dataNascimento: String = ""
+    @SerializedName("birthDate")
+    var birthDate: String = ""
 
-    @SerializedName("genero")
+    @SerializedName("genre")
     var genre: String = ""
 
     @SerializedName("userType")

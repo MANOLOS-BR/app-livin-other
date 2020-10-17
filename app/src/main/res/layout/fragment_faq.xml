@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -34,7 +34,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/image_title" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -47,5 +46,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_title" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view"
+        shimmer:duration="800">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="16dp">
+
+            <LinearLayout
+                android:id="@+id/container_shimmer_left"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@+id/container_shimmer"
+                app:layout_constraintRight_toLeftOf="@+id/container_shimmer_right"
+                app:layout_constraintTop_toTopOf="@+id/container_shimmer">
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_shimmer_right"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@+id/container_shimmer_left"
+                app:layout_constraintRight_toRightOf="@+id/container_shimmer"
+                app:layout_constraintTop_toTopOf="@+id/container_shimmer">
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+                <include layout="@layout/shimmer_faq_placeholder" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

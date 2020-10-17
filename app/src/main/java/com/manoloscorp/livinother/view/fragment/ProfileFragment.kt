@@ -1,5 +1,6 @@
 package com.manoloscorp.livinother.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.model.Profile
+import com.manoloscorp.livinother.view.activity.LoginActivity
+import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mViewModel: ProfileViewModel
+
+    private val progressDialog = CustomProgressDialog()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +34,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
 
         observe()
+
+        progressDialog.show(context, "Aguarde...")
 
         mViewModel.getUserId()
 
@@ -76,6 +83,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             if (it != null) {
                 setProfileValues(it)
             }
+            progressDialog.dialog.dismiss()
         })
 
         mViewModel.validation.observe(viewLifecycleOwner, Observer {
@@ -87,7 +95,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         text_user_email.text = profile.name
         text_name.text = profile.name
         text_email.text = profile.email
-        text_date_birthday.text = profile.dataNascimento
+        text_date_birthday.text = profile.birthDate
         text_genre.text = profile.genre
         setProfileType(profile.userType)
 
@@ -109,8 +117,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
      * Inicializa os eventos de click
      */
     private fun setListeners() {
-        radioGroup_user_type.setOnClickListener(this)
-        radioButton_donor.setOnClickListener(this)
+        radioGroup_user_type.setOnClickListener(null)
+        radioButton_donor.setOnClickListener(null)
         radioButton_receiver.setOnClickListener(this)
         btn_logout.setOnClickListener(this)
         removeClick()
@@ -127,11 +135,17 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
+        if(view.id == R.id.btn_logout){
+            mViewModel.logout()
 
+            startActivity(Intent(context, LoginActivity::class.java))
+            activity?.finish()
+        }
     }
 
+
     private fun removeClick() {
-        radioButton_donor.isClickable = false
+        radioButton_receiver.isClickable = false
         radioButton_donor.isClickable = false
     }
 }

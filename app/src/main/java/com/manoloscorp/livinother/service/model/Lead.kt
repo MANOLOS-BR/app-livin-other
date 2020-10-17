@@ -13,10 +13,10 @@ class Lead {
     @SerializedName("password")
     var password: String = ""
 
-    @SerializedName("dataNascimento")
-    var dataNascimento: String = ""
+    @SerializedName("birthDate")
+    var birthDate: String = ""
 
-    @SerializedName("genero")
+    @SerializedName("genre")
     var genre: String = ""
 
     @SerializedName("userType")

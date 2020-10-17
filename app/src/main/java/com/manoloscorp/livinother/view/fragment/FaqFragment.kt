@@ -10,18 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.listener.FaqListener
 import com.manoloscorp.livinother.view.adapter.FaqAdapter
 import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.FaqViewModel
+import kotlinx.android.synthetic.main.fragment_faq.*
 
 class FaqFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mViewModel: FaqViewModel
     private val mAdapter = FaqAdapter()
 
-    private val progressDialog = CustomProgressDialog()
+    private lateinit var mShimmerLayout: ShimmerFrameLayout
 
     private lateinit var mListener: FaqListener
 
@@ -35,11 +37,14 @@ class FaqFragment : Fragment(), View.OnClickListener {
 
         val root = inflater.inflate(R.layout.fragment_faq, container, false)
 
+        mShimmerLayout = root.findViewById(R.id.shimmer_layout)
+
         setRecyclerAndAdapter(root)
 
         observe()
 
-        progressDialog.show(context, "Aguarde...")
+        mShimmerLayout.visibility = View.VISIBLE
+        mShimmerLayout.startShimmerAnimation()
         mViewModel.getAllFaqs()
 
         return root
@@ -54,9 +59,10 @@ class FaqFragment : Fragment(), View.OnClickListener {
     private fun observe() {
         mViewModel.faq.observe(viewLifecycleOwner, Observer {
             if (it != null && it.count() > 0) {
+                mShimmerLayout.stopShimmerAnimation()
+                mShimmerLayout.visibility = View.GONE
                 mAdapter.updateListener(it)
             }
-            progressDialog.dialog.dismiss()
         })
 
         mViewModel.validation.observe(viewLifecycleOwner, Observer {

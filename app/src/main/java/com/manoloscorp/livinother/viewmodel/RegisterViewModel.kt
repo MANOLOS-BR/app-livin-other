@@ -48,7 +48,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         medicalHistory.height = height
         medicalHistory.weight = weight
 
-        mCreateUser.value?.dataNascimento = FormatValues.formatBirthdayDate(birthday).toString()
+        mCreateUser.value?.birthDate = FormatValues.formatBirthdayDate(birthday).toString()
 
         mCreateUser.value?.medicalHistory = medicalHistory
         mCreateUser.value?.genre = genre

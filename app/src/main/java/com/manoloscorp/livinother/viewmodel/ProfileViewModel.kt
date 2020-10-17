@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.manoloscorp.livinother.service.constants.LivinOtherConstants
+import com.manoloscorp.livinother.service.constants.LivinOtherConstants.SHARED.TOKEN_KEY
+import com.manoloscorp.livinother.service.constants.LivinOtherConstants.SHARED.TOKEN_USER
 import com.manoloscorp.livinother.service.listener.ApiListener
 import com.manoloscorp.livinother.service.listener.ValidationListener
 import com.manoloscorp.livinother.service.model.Profile
@@ -25,9 +26,8 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val mValidationListener = MutableLiveData<ValidationListener>()
     var validation: LiveData<ValidationListener> = mValidationListener
 
-
     fun getUserId(){
-        val id = mSharedPreferences.getString(LivinOtherConstants.SHARED.TOKEN_USER).toLong() ?: 0
+        val id = mSharedPreferences.getString(TOKEN_USER).toLong()
         mIdUser.value = id
     }
 
@@ -42,6 +42,11 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             }
 
         })
+    }
+
+    fun logout() {
+        mSharedPreferences.remove(TOKEN_USER)
+        mSharedPreferences.remove(TOKEN_KEY)
     }
 
 }

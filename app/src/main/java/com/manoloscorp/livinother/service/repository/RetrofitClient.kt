@@ -1,8 +1,6 @@
 package com.manoloscorp.livinother.service.repository
 
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.NAME_AUTH
-import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.TOKEN_AUTH
-import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.TOKEN_KEY
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.RETROFIT.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
