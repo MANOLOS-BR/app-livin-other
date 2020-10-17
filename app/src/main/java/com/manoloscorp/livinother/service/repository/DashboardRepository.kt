@@ -5,26 +5,28 @@ import com.google.gson.Gson
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants
 import com.manoloscorp.livinother.service.listener.ApiListener
+import com.manoloscorp.livinother.service.model.Dashboard
 import com.manoloscorp.livinother.service.model.Faq
+import com.manoloscorp.livinother.service.repository.remote.DashboardService
 import com.manoloscorp.livinother.service.repository.remote.FaqService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FaqRepository(val context: Context) : BaseRepository(context) {
+class DashboardRepository(val context: Context) : BaseRepository(context) {
 
-    private val mRemote = RetrofitClient.createService(FaqService::class.java)
+    private val mRemote = RetrofitClient.createService(DashboardService::class.java)
 
-    fun getAllFaqs(listener: ApiListener<List<Faq>>) {
+    fun getDashboard(listener: ApiListener<Dashboard>) {
 
-        val call: Call<List<Faq>> = mRemote.getFaqs()
+        val call: Call<Dashboard> = mRemote.getDashboard()
 
-        call.enqueue(object : Callback<List<Faq>>{
-            override fun onFailure(call: Call<List<Faq>>, t: Throwable) {
+        call.enqueue(object : Callback<Dashboard> {
+            override fun onFailure(call: Call<Dashboard>, t: Throwable) {
                 listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
             }
 
-            override fun onResponse(call: Call<List<Faq>>, response: Response<List<Faq>>) {
+            override fun onResponse(call: Call<Dashboard>, response: Response<Dashboard>) {
                 if (response.code() != LivinOtherConstants.HTTP.SUCCESS) {
 //                    val validation = Gson().fromJson(response.errorBody()?.string(), String::class.java)
 //                    listener.onFailure(validation)
