@@ -51,6 +51,7 @@
         android:id="@+id/shimmer_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@+id/recycler_view"
         shimmer:duration="800">
 

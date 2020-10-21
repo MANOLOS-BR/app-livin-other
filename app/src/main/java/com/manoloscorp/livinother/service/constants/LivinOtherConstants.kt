@@ -33,4 +33,13 @@ class LivinOtherConstants private constructor() {
         const val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
     }
 
+    object ORGAN {
+        const val CORACAO = "Coração"
+        const val PULMAO = "Pulmão"
+        const val RIM = "Rim"
+        const val FIGADO = "Fígado"
+        const val PANCREAS = "Pâncreas"
+        const val CORNEA = "Córnea"
+    }
+
 }

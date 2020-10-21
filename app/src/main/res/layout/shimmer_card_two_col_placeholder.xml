@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_organ_date_profiles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/text_value_donor"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorShimmer"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_donor"
+            app:layout_constraintStart_toStartOf="@+id/card_view_donor"
+            app:layout_constraintTop_toTopOf="@+id/card_view_donor" />
+
+        <View
+            android:id="@+id/text_donor"
+            android:layout_width="144dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorShimmer"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view_donor"
+            app:layout_constraintEnd_toEndOf="@+id/text_value_donor"
+            app:layout_constraintStart_toStartOf="@+id/text_value_donor" />
+
+        <View
+            android:id="@+id/card_view_donor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_card_corner_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/card_view_receptor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/text_value_receptor"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorShimmer"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_receptor"
+            app:layout_constraintStart_toStartOf="@+id/card_view_receptor"
+            app:layout_constraintTop_toTopOf="@+id/card_view_receptor" />
+
+        <View
+            android:id="@+id/text_receptor"
+            android:layout_width="144dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorShimmer"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view_receptor"
+            app:layout_constraintEnd_toEndOf="@+id/text_value_receptor"
+            app:layout_constraintStart_toStartOf="@+id/text_value_receptor" />
+
+
+        <View
+            android:id="@+id/card_view_receptor"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/shape_card_corner_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_view_donor"
+            app:layout_constraintTop_toTopOf="@+id/card_view_donor" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

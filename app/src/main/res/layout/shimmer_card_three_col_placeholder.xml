@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_card_corner_white">
+
+            <View
+                android:id="@+id/text_value_donor"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toTopOf="@+id/text_donor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/text_donor"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_margin="8dp"
+                android:background="@color/colorShimmer"
+                android:elevation="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/card_view_donor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_donor" />
+
+            <View
+                android:id="@+id/card_view_donor"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_donor"
+                app:layout_constraintStart_toStartOf="@+id/text_donor"
+                app:layout_constraintTop_toBottomOf="@+id/text_donor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_card_corner_white">
+
+            <View
+                android:id="@+id/text_value_donor_middle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toTopOf="@+id/text_donor_middle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/text_donor_middle"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_margin="8dp"
+                android:background="@color/colorShimmer"
+                android:elevation="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/card_view_donor_middle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_donor_middle" />
+
+            <View
+                android:id="@+id/card_view_donor_middle"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_donor_middle"
+                app:layout_constraintStart_toStartOf="@+id/text_donor_middle"
+                app:layout_constraintTop_toBottomOf="@+id/text_donor_middle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_card_corner_white">
+
+            <View
+                android:id="@+id/text_value_donor_end"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toTopOf="@+id/text_donor_end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/text_donor_end"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_margin="8dp"
+                android:background="@color/colorShimmer"
+                android:elevation="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/card_view_donor_end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_donor_end" />
+
+            <View
+                android:id="@+id/card_view_donor_end"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorShimmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_donor_end"
+                app:layout_constraintStart_toStartOf="@+id/text_donor_end"
+                app:layout_constraintTop_toBottomOf="@+id/text_donor_end" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
