@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.manoloscorp.livinother.R
+import com.manoloscorp.livinother.view.adapter.DonationAdapter
 import com.manoloscorp.livinother.view.adapter.OrganAdapter
+import com.manoloscorp.livinother.view.adapter.TransplantAdapter
 import com.manoloscorp.livinother.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
@@ -21,7 +23,9 @@ class DashboardFragment : Fragment() {
 
     private lateinit var mViewModel: DashboardViewModel
 
-    private val mAdapter = OrganAdapter()
+    private val mOrganAdapter = OrganAdapter()
+    private val mTransplantAdapter = TransplantAdapter()
+    private val mDonationAdapter = DonationAdapter()
 
     private lateinit var mShimmerLayout: ShimmerFrameLayout
 
@@ -54,9 +58,17 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setRecyclerAndAdapter(root: View) {
-        val recycler: RecyclerView = root.findViewById(R.id.recycler_view_ischemia)
-        recycler.layoutManager = GridLayoutManager(context, 3)
-        recycler.adapter = mAdapter
+        val recyclerIschemia: RecyclerView = root.findViewById(R.id.recycler_view_ischemia)
+        recyclerIschemia.layoutManager = GridLayoutManager(context, 3)
+        recyclerIschemia.adapter = mOrganAdapter
+
+        val recyclerTransplant: RecyclerView = root.findViewById(R.id.recycler_view_transplant)
+        recyclerTransplant.layoutManager = GridLayoutManager(context, 2)
+        recyclerTransplant.adapter = mTransplantAdapter
+
+        val recyclerDonation: RecyclerView = root.findViewById(R.id.recycler_view_donation)
+        recyclerDonation.layoutManager = GridLayoutManager(context, 1)
+        recyclerDonation.adapter = mDonationAdapter
     }
 
     private fun observe() {
@@ -68,10 +80,15 @@ class DashboardFragment : Fragment() {
                 mShimmerLayout.stopShimmerAnimation()
 
                 mShimmerLayout.visibility = View.GONE
+
                 container_organ_date_profiles.visibility = View.VISIBLE
                 container_organ_ischemia.visibility = View.VISIBLE
+                container_organ_transplant.visibility = View.VISIBLE
+                container_organ_donation.visibility = View.VISIBLE
 
-                mAdapter.updateListener(it.organList)
+                mOrganAdapter.updateListener(it.organList)
+                mTransplantAdapter.updateListener(it.transplantList)
+                mDonationAdapter.updateListener(it.donationList)
             }
         })
 

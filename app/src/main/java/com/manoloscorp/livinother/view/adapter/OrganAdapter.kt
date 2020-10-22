@@ -9,7 +9,7 @@ import com.manoloscorp.livinother.view.viewholder.OrganItemViewHolder
 
 
 class OrganAdapter : RecyclerView.Adapter<OrganItemViewHolder>() {
-//    http://cidadao.saude.al.gov.br/central-de-transplantes/
+
     private var mList: List<Organ> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrganItemViewHolder {

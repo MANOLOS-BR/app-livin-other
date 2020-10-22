@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_item_donation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/shape_card_corner_white"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/text_donation_state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:gravity="start"
+        android:text="Nome estado"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_text_potential_donor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Potêncial doador"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/view_div"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_div" />
+
+
+    <TextView
+        android:id="@+id/text_potential_donor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/colorIndigo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_text_potential_donor"
+        app:layout_constraintStart_toStartOf="@+id/lbl_text_potential_donor"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_text_potential_donor" />
+
+
+    <TextView
+        android:id="@+id/lbl_text_effective_donor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Doador efetivo"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_text_potential_donor"
+        app:layout_constraintStart_toStartOf="@+id/lbl_text_potential_donor"
+        app:layout_constraintTop_toBottomOf="@+id/text_potential_donor" />
+
+
+    <TextView
+        android:id="@+id/text_effective_donor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/colorIndigo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_text_effective_donor"
+        app:layout_constraintStart_toStartOf="@+id/lbl_text_effective_donor"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_text_effective_donor" />
+
+    <View
+        android:id="@+id/view_div"
+        android:layout_width="2dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/grey"
+        android:gravity="center"
+        android:text="Transplantes realizados"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lbl_text_family_interview"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lbl_text_potential_donor"
+        app:layout_constraintTop_toBottomOf="@+id/text_donation_state" />
+
+    <TextView
+        android:id="@+id/lbl_text_family_interview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:text="Intervenção familiar"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_div"
+        app:layout_constraintTop_toTopOf="@+id/view_div" />
+
+    <TextView
+        android:id="@+id/text_family_interview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/colorIndigo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_text_family_interview"
+        app:layout_constraintStart_toStartOf="@+id/lbl_text_family_interview"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_text_family_interview" />
+
+    <TextView
+        android:id="@+id/lbl_text_family_negative"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Negativa familiar"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_text_family_interview"
+        app:layout_constraintStart_toStartOf="@+id/lbl_text_family_interview"
+        app:layout_constraintTop_toBottomOf="@+id/text_family_interview" />
+
+    <TextView
+        android:id="@+id/text_family_negative"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/colorIndigo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lbl_text_family_negative"
+        app:layout_constraintStart_toStartOf="@+id/lbl_text_family_negative"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_text_family_negative" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
