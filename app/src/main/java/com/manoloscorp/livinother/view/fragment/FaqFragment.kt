@@ -1,9 +1,12 @@
 package com.manoloscorp.livinother.view.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,12 +16,11 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.listener.FaqListener
+import com.manoloscorp.livinother.service.model.Faq
 import com.manoloscorp.livinother.view.adapter.FaqAdapter
-import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.FaqViewModel
-import kotlinx.android.synthetic.main.fragment_faq.*
 
-class FaqFragment : Fragment(), View.OnClickListener {
+class FaqFragment : Fragment() {
 
     private lateinit var mViewModel: FaqViewModel
     private val mAdapter = FaqAdapter()
@@ -43,11 +45,36 @@ class FaqFragment : Fragment(), View.OnClickListener {
 
         observe()
 
+        mListener = object : FaqListener {
+            override fun onItemClick(param: Faq) {
+                showCustomAlert(param)
+            }
+
+        }
+
         mShimmerLayout.visibility = View.VISIBLE
         mShimmerLayout.startShimmerAnimation()
         mViewModel.getAllFaqs()
 
         return root
+    }
+
+    private fun showCustomAlert(param: Faq) {
+        val dialogView = layoutInflater.inflate(R.layout.content_dialog_view, null)
+        val customDialog = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .show()
+
+        val txtTitle = dialogView.findViewById<TextView>(R.id.text_title_dialog)
+        val txtMessage = dialogView.findViewById<TextView>(R.id.text_message_dialog)
+
+        txtTitle.text = (param.question)
+        txtMessage.text = (param.answer)
+
+        val btDismiss = dialogView.findViewById<Button>(R.id.btDismissCustomDialog)
+        btDismiss.setOnClickListener {
+            customDialog.dismiss()
+        }
     }
 
     private fun setRecyclerAndAdapter(root: View) {
@@ -71,7 +98,9 @@ class FaqFragment : Fragment(), View.OnClickListener {
 
     }
 
-    override fun onClick(view: View) {
-
+    override fun onResume() {
+        super.onResume()
+        mAdapter.attachListener(mListener)
     }
+
 }

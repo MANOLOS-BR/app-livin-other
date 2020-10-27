@@ -18,7 +18,7 @@ class FaqAdapter: RecyclerView.Adapter<FaqItemViewHolder>()  {
         val item = LayoutInflater.from(parent.context)
             .inflate(R.layout.row_faq_adapter, parent, false)
 
-        return FaqItemViewHolder(item)
+        return FaqItemViewHolder(item, mListener)
     }
 
     override fun getItemCount(): Int {

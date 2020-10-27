@@ -5,10 +5,11 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.manoloscorp.livinother.R
+import com.manoloscorp.livinother.service.listener.FaqListener
 import com.manoloscorp.livinother.service.model.Faq
 
 
-class FaqItemViewHolder(itemView: View) :
+class FaqItemViewHolder(itemView: View, val listener: FaqListener) :
     RecyclerView.ViewHolder(itemView) {
 
     private var mContainerItem: ConstraintLayout = itemView.findViewById(R.id.container_item_faq)
@@ -19,8 +20,7 @@ class FaqItemViewHolder(itemView: View) :
         this.mQuestion.text = faq.question
 //        this.mAnswer.text = faq.answer
 
-
-//        mContainerItem.setOnClickListener { listener.onItemClick(faq) }
+        mContainerItem.setOnClickListener { listener.onItemClick(faq) }
     }
 
 }
