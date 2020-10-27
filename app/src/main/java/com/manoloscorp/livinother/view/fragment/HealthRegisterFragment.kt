@@ -54,7 +54,8 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
                 R.id.radioButton_donor ->
                     if (checked) {
                         radioButton_donor.setTextColor(resources.getColor(R.color.white, null))
-                        radioButton_receiver.setTextColor(resources.getColor(R.color.dark_grey,null)
+                        radioButton_receiver.setTextColor(
+                            resources.getColor(R.color.dark_grey, null)
                         )
                     }
                 R.id.radioButton_receiver ->
@@ -106,6 +107,9 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.back_arrow -> {
+                mViewModel.setCurrentFragmentPosition(1)
+            }
             R.id.radioButton_donor -> {
                 onRadioButtonClicked(view)
             }
@@ -118,16 +122,28 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
 
                 val eatingHabit = dropdown_eatingHabit.selectedItem.toString()
 
-                if (eatingHabit != null && eatingHabit != "" && dropdown_eatingHabit.adapter.getItem(0) != eatingHabit) {
+                if (eatingHabit != null && eatingHabit != "" && dropdown_eatingHabit.adapter.getItem(
+                        0
+                    ) != eatingHabit
+                ) {
                     val chemicalAddict = checkBox_chemicalAddict.isChecked
                     val alcoholic = checkBox_alcoholic.isChecked
                     val communicableDiseases = checkBox_communicableDiseases.isChecked
                     val degenerativeDiseases = checkBox_degenerativeDiseases.isChecked
                     val practicePhysicalActivities = checkBox_practicePhysicalActivities.isChecked
 
-                    mViewModel.setHealthRegister(userType, eatingHabit, chemicalAddict, alcoholic, communicableDiseases, degenerativeDiseases, practicePhysicalActivities)
-                }else{
-                    Toast.makeText(context, "Selecione um hábito alimentar", Toast.LENGTH_SHORT).show()
+                    mViewModel.setHealthRegister(
+                        userType,
+                        eatingHabit,
+                        chemicalAddict,
+                        alcoholic,
+                        communicableDiseases,
+                        degenerativeDiseases,
+                        practicePhysicalActivities
+                    )
+                } else {
+                    Toast.makeText(context, "Selecione um hábito alimentar", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

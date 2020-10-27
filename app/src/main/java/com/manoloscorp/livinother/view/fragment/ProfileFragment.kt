@@ -16,6 +16,8 @@ import com.manoloscorp.livinother.view.activity.LoginActivity
 import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 
@@ -45,6 +47,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+
     }
 
     private fun onRadioButtonClicked(view: View) {
@@ -95,7 +98,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         text_user_email.text = profile.name
         text_name.text = profile.name
         text_email.text = profile.email
-        text_date_birthday.text = profile.birthDate
+
+        formatDateBirthday(profile)
+
         text_genre.text = profile.genre
         setProfileType(profile.userType)
 
@@ -109,6 +114,16 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         checkbox_practice_physical_activities.isChecked =
             profile.medicalHistory.practicePhysicalActivity
     }
+
+    private fun formatDateBirthday(profile: Profile) {
+        val dateStr = profile.birthDate
+        val date = SimpleDateFormat("yyyy-MM-dd").parse(dateStr)
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        sdf.timeZone = TimeZone.getTimeZone("CET")
+        val dateText = sdf.format(date)
+        text_date_birthday.text = dateText
+    }
+
 
     private fun formatWeight(value: String): String = "$value kg"
     private fun formatHeight(value: String): String = "$value m"
@@ -135,7 +150,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        if(view.id == R.id.btn_logout){
+        if (view.id == R.id.btn_logout) {
             mViewModel.logout()
 
             startActivity(Intent(context, LoginActivity::class.java))

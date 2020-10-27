@@ -8,7 +8,7 @@ import java.util.*
 
 open class FormatValues {
 
-    companion object{
+    companion object {
 
         fun formatMoneyText(value: Double): String {
             val ptBr = Locale("pt", "BR")
@@ -37,6 +37,11 @@ open class FormatValues {
             }
 
             return formattedDate
+        }
+
+        fun toSimpleDateString(date: Date): String {
+            val format = SimpleDateFormat("dd/MM/yyy")
+            return format.format(date)
         }
     }
 
