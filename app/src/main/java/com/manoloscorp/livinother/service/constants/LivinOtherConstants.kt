@@ -1,8 +1,5 @@
 package com.manoloscorp.livinother.service.constants
 
-import com.google.gson.annotations.SerializedName
-import com.manoloscorp.livinother.service.model.MedicalHistory
-
 class LivinOtherConstants private constructor() {
 
 
@@ -24,7 +21,8 @@ class LivinOtherConstants private constructor() {
     }
 
     object RETROFIT {
-        const val BASE_URL = "https://livinother.herokuapp.com/"
+        const val BASE_URL_DEV = "https://livinother.herokuapp.com/"
+        const val BASE_URL_PROD = "https://api-livin-other.azurewebsites.net/"
     }
 
     object ONBOARDING {

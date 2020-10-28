@@ -1,7 +1,7 @@
 package com.manoloscorp.livinother.service.repository
 
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.HEADER.NAME_AUTH
-import com.manoloscorp.livinother.service.constants.LivinOtherConstants.RETROFIT.BASE_URL
+import com.manoloscorp.livinother.service.constants.LivinOtherConstants.RETROFIT.BASE_URL_PROD
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,7 +28,7 @@ class RetrofitClient private constructor() {
 
             if (!Companion::mRetrofit.isInitialized) {
                 mRetrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_URL_PROD)
                     .client(httpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()

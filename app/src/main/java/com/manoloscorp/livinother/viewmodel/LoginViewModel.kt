@@ -25,9 +25,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val mLoggedUser = MutableLiveData<Boolean>()
     var loggedUser: LiveData<Boolean> = mLoggedUser
 
-    fun doLogin(username: String, password: String){
+    fun doLogin(username: String, password: String) {
         val bodyAuth = Authentication(username, password)
-        mAuthRepository.login(bodyAuth, object : ApiListener<Header>{
+        mAuthRepository.login(bodyAuth, object : ApiListener<Header> {
             override fun onSuccess(param: Header) {
                 mSharedPreferences.storeString(TOKEN_USER, param.user.toString())
                 mSharedPreferences.storeString(TOKEN_KEY, param.token)
