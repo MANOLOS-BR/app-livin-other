@@ -22,6 +22,9 @@ class Lead {
     @SerializedName("userType")
     var userType: String = ""
 
+    @SerializedName("eatingHabit")
+    var eatingHabit: String = ""
+
     @SerializedName("medicalHistory")
     lateinit var medicalHistory: MedicalHistory
 

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     tools:context=".view.fragment.ProfileFragment">
@@ -280,10 +281,32 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="-"
+                        app:layout_constraintBottom_toTopOf="@+id/lbl_eatingHabit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_genre"/>
+
+                    <TextView
+                        android:id="@+id/lbl_eatingHabit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Hábito Alimentar"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/text_eatingHabit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_genre" />
+
+                    <TextView
+                        android:id="@+id/text_eatingHabit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="-"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/lbl_genre" />
+                        app:layout_constraintTop_toBottomOf="@id/lbl_eatingHabit"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -293,7 +316,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Histórico físico e clínico"
+                    android:text="Informações sociais e clinicas"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/container_info_history"
@@ -458,4 +481,34 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/scrollView_dashboard"
+        shimmer:duration="800">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/container_shimmer_left"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="@+id/container_shimmer"
+                app:layout_constraintRight_toLeftOf="@+id/container_shimmer_right"
+                app:layout_constraintTop_toTopOf="@+id/container_shimmer">
+
+                <include layout="@layout/shimmer_profile_placeholder" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

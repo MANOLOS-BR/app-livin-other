@@ -64,6 +64,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         practicePhysicalActivities: Boolean
     ) {
         mCreateUser.value?.userType = userType
+        mCreateUser.value?.eatingHabit = eatingHabit
 
         mCreateUser.value?.medicalHistory?.drugAddict = chemicalAddict
         mCreateUser.value?.medicalHistory?.alcoholConsumption = alcoholic

@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.model.Profile
 import com.manoloscorp.livinother.view.activity.LoginActivity
-import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.text.SimpleDateFormat
@@ -23,7 +24,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mViewModel: ProfileViewModel
 
-    private val progressDialog = CustomProgressDialog()
+
+    private lateinit var mShimmerLayout: ShimmerFrameLayout
+    private lateinit var mScrollView: ScrollView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +40,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
         observe()
 
-        progressDialog.show(context, "Aguarde...")
+        mScrollView = root.findViewById(R.id.scrollView)
+        mShimmerLayout = root.findViewById(R.id.shimmer_layout)
+
+        mShimmerLayout.visibility = View.VISIBLE
+        mScrollView.visibility = View.GONE
+
+        mShimmerLayout.startShimmerAnimation()
 
         mViewModel.getUserId()
 
@@ -86,7 +95,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             if (it != null) {
                 setProfileValues(it)
             }
-            progressDialog.dialog.dismiss()
+
+            mShimmerLayout.stopShimmerAnimation()
+
+            mShimmerLayout.visibility = View.GONE
+            mScrollView.visibility = View.VISIBLE
+
         })
 
         mViewModel.validation.observe(viewLifecycleOwner, Observer {
