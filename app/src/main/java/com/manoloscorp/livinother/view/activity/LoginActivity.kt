@@ -12,6 +12,7 @@ import com.manoloscorp.livinother.service.repository.local.SecurityPreferences
 import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_personal_register.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -45,7 +46,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         if (view.id == R.id.button_login) {
-            progressDialog.show(this, "Aguarde...")
             handleLogin()
         } else if (view.id == R.id.text_new_account || view.id == R.id.text_register) {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -59,7 +59,22 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun handleLogin() {
         val email = text_edit_email.text.toString()
         val password = text_edit_password.text.toString()
-        mViewModel.doLogin(email, password)
+
+        validationFields(email, password)
+    }
+
+    private fun validationFields(email: String, password: String) {
+        if (email != null && email != "") {
+            if (password != null && password != "") {
+                progressDialog.show(this, "Aguarde...")
+                mViewModel.doLogin(email, password)
+            } else {
+                Toast.makeText(applicationContext, "Preencha o campo senha", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } else {
+            Toast.makeText(applicationContext, "Preencha o campo e-mail", Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
