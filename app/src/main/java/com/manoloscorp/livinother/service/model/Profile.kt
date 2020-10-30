@@ -16,6 +16,9 @@ class Profile {
     @SerializedName("genre")
     var genre: String = ""
 
+    @SerializedName("eatingHabit")
+    var eatingHabit: String = ""
+
     @SerializedName("userType")
     var userType: String = ""
 

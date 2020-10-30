@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Usuário"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:theme="@style/MyEditText" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:theme="@style/MyEditText" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +95,7 @@
             android:layout_height="wrap_content"
             android:hint="Senha"
             android:inputType="textPassword"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:theme="@style/MyEditText" />
     </com.google.android.material.textfield.TextInputLayout>

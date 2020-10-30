@@ -62,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Data Nascimento"
                     android:inputType="date"
+                    android:singleLine="true"
                     android:textColor="@color/white"
                     android:theme="@style/MyEditText" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Altura"
                     android:inputType="numberDecimal"
+                    android:singleLine="true"
                     android:textColor="@color/white"
                     android:theme="@style/MyEditText" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -100,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Peso"
                     android:inputType="numberDecimal"
+                    android:singleLine="true"
                     android:textColor="@color/white"
                     android:theme="@style/MyEditText" />
             </com.google.android.material.textfield.TextInputLayout>

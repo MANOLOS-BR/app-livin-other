@@ -1,7 +1,15 @@
 package com.manoloscorp.livinother.view.fragment
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.database.Cursor
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +32,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mViewModel: ProfileViewModel
 
+    private lateinit var mContext: Context
 
     private lateinit var mShimmerLayout: ShimmerFrameLayout
     private lateinit var mScrollView: ScrollView
@@ -41,6 +50,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         observe()
 
         mScrollView = root.findViewById(R.id.scrollView)
+
         mShimmerLayout = root.findViewById(R.id.shimmer_layout)
 
         mShimmerLayout.visibility = View.VISIBLE
@@ -57,6 +67,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
 
+    }
+
+    override fun onAttach(context: Context) {
+        this.mContext = context;
+        super.onAttach(context)
     }
 
     private fun onRadioButtonClicked(view: View) {
@@ -116,6 +131,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         formatDateBirthday(profile)
 
         text_genre.text = profile.genre
+        text_eatingHabit.text = profile.eatingHabit
+
         setProfileType(profile.userType)
 
         text_weight.text = formatWeight(profile.medicalHistory.weight.toString())
@@ -146,6 +163,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
      * Inicializa os eventos de click
      */
     private fun setListeners() {
+        button_take_photo.setOnClickListener(this)
         radioGroup_user_type.setOnClickListener(null)
         radioButton_donor.setOnClickListener(null)
         radioButton_receiver.setOnClickListener(this)
@@ -164,14 +182,80 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        if (view.id == R.id.btn_logout) {
-            mViewModel.logout()
 
-            startActivity(Intent(context, LoginActivity::class.java))
-            activity?.finish()
+        when (view.id) {
+            R.id.button_take_photo -> {
+                selectImage(mContext)
+            }
+
+            R.id.btn_logout -> {
+                mViewModel.logout()
+
+                startActivity(Intent(context, LoginActivity::class.java))
+                activity?.finish()
+            }
         }
     }
 
+    private fun selectImage(context: Context) {
+        val options =
+            arrayOf<CharSequence>("Tirar uma foto", "Escolher da galeria", "Cancelar")
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Escolha sua foto de perfil")
+
+        builder.setItems(options) { dialog, item ->
+            when {
+                options[item] == "Tirar uma foto" -> {
+                    val takePicture =
+                        Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(takePicture, 0)
+                }
+                options[item] == "Escolher da galeria" -> {
+                    val pickPhoto = Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                    startActivityForResult(pickPhoto, 1)
+                }
+                options[item] == "Cancelar" -> {
+                    dialog.dismiss()
+                }
+            }
+        }
+        builder.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != RESULT_CANCELED) {
+            when (requestCode) {
+                0 -> if (resultCode == RESULT_OK && data != null) {
+                    val selectedImage = data.extras!!["data"] as Bitmap?
+                    image_user_profile.setImageBitmap(selectedImage)
+                }
+                1 -> if (resultCode == RESULT_OK && data != null) {
+                    val selectedImage = data.data
+                    val filePathColumn =
+                        arrayOf(MediaStore.Images.Media.DATA)
+                    if (selectedImage != null) {
+
+                        val cursor: Cursor? = mContext.contentResolver.query(
+                            selectedImage,
+                            filePathColumn, null, null, null
+                        )
+                        if (cursor != null) {
+                            cursor.moveToFirst()
+                            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+                            val picturePath = cursor.getString(columnIndex)
+                            image_user_profile.setImageBitmap(BitmapFactory.decodeFile(picturePath))
+                            cursor.close()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private fun removeClick() {
         radioButton_receiver.isClickable = false

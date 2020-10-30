@@ -19,7 +19,7 @@
         android:id="@+id/text_message_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_margin="8dp"
         android:gravity="center"
         android:text="This is a custom dialog message"
         android:textSize="16sp" />
