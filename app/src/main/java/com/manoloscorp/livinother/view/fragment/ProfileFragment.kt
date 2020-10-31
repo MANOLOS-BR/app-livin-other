@@ -20,10 +20,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.RadioButton
-import android.widget.ScrollView
-import android.widget.Toast
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -34,11 +32,16 @@ import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.CAMERA.ID_PHOTO_PICKER_FROM_CAMERA
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.CAMERA.REQUEST_CODE_TAKE_FROM_CAMERA
 import com.manoloscorp.livinother.service.model.Profile
+import com.manoloscorp.livinother.utils.FormatValues
 import com.manoloscorp.livinother.view.activity.LoginActivity
 import com.manoloscorp.livinother.viewmodel.ProfileViewModel
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.soundcloud.android.crop.Crop
+import kotlinx.android.synthetic.main.fragment_health_register.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.radioButton_donor
+import kotlinx.android.synthetic.main.fragment_profile.radioButton_receiver
+import kotlinx.android.synthetic.main.fragment_profile.radioGroup_user_type
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -54,6 +57,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mShimmerLayout: ShimmerFrameLayout
     private lateinit var mScrollView: ScrollView
+    private lateinit var mEditProfile: ConstraintLayout
     private lateinit var mImageView: CircularImageView
 
     private lateinit var mImageCaptureUri: Uri
@@ -94,10 +98,16 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             R.id.shimmer_layout -> {
                 mShimmerLayout.visibility = View.VISIBLE
                 mScrollView.visibility = View.GONE
+                mEditProfile.visibility = View.GONE
             }
             R.id.scrollView_profile -> {
                 mShimmerLayout.visibility = View.GONE
+                mEditProfile.visibility = View.GONE
                 mScrollView.visibility = View.VISIBLE
+            }
+            R.id.container_edit_profile -> {
+                mEditProfile.visibility = View.VISIBLE
+                mScrollView.visibility = View.GONE
             }
         }
     }
@@ -106,6 +116,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         mImageView = root.findViewById(R.id.image_user_profile)
         mScrollView = root.findViewById(R.id.scrollView_profile)
         mShimmerLayout = root.findViewById(R.id.shimmer_layout)
+        mEditProfile = root.findViewById(R.id.container_edit_profile)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,7 +127,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.button_take_photo -> {
-                onChangePhotoClicked(button_take_photo)
+                onChangePhotoClicked()
             }
 
             R.id.btn_logout -> {
@@ -125,6 +136,118 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 startActivity(Intent(context, LoginActivity::class.java))
                 activity?.finish()
             }
+
+            R.id.button_open_edit -> {
+                val user = mViewModel.getUserData()
+
+                setupSpinnerGenre(dropdownGenre_edit)
+                setupSpinnerEatingHabit(dropdown_eatingHabit_edit)
+                setUserEdit(user)
+
+                setVisibility(container_edit_profile)
+            }
+
+            R.id.btn_edit -> {
+                val user = getUserEditValues(mViewModel.getUserData())
+                mViewModel.updateProfile(1, user)
+            }
+
+            R.id.radioButton_donor_edit -> {
+                onRadioButtonClicked(view)
+            }
+            R.id.radioButton_receiver_edit -> {
+                onRadioButtonClicked(view)
+            }
+
+            R.id.back_arrow_to_profile -> {
+                mEditProfile.visibility = View.GONE
+                mScrollView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun getUserEditValues(userData: Profile): Profile {
+        val user: Profile = userData
+
+        user.name = text_edit_user_edit.text.toString()
+        user.email = text_edit_profile_email_edit.text.toString()
+
+        user.birthDate = formatDateBirthdayToService()
+
+        user.medicalHistory.height = text_edit_height_edit.text.toString().toDouble()
+        user.medicalHistory.weight = text_edit_weight_edit.text.toString().toDouble()
+
+        user.eatingHabit = dropdown_eatingHabit_edit.selectedItem.toString()
+        user.genre = dropdownGenre_edit.selectedItem.toString()
+
+        user.userType = getUserType()
+
+        user.medicalHistory.drugAddict = checkBox_chemicalAddict_edit.isChecked
+        user.medicalHistory.alcoholConsumption = checkBox_alcoholic_edit.isChecked
+        user.medicalHistory.communicableDisease = checkBox_communicableDiseases_edit.isChecked
+        user.medicalHistory.degenerativeDisease = checkBox_degenerativeDiseases_edit.isChecked
+        user.medicalHistory.practicePhysicalActivity =
+            checkBox_practicePhysicalActivities_edit.isChecked
+
+        return user
+    }
+
+    private fun getUserType(): String {
+        return if (radioButton_donor_edit.isChecked) {
+            radioButton_donor_edit.text.toString()
+        } else {
+            radioButton_receiver_edit.text.toString()
+        }
+
+//        return if (radioButton_donor.isSelected) {
+//            radioButton_donor.text.toString()
+//        } else {
+//            radioButton_receiver.text.toString()
+//        }
+    }
+
+    private fun formatDateBirthdayToService(): String {
+        val birthday = text_edit_birthday_edit.text.toString()
+        return FormatValues.formatBirthdayDate(birthday).toString()
+    }
+
+    private fun setUserEdit(profile: Profile) {
+        text_edit_user_edit.setText(profile.name)
+        text_edit_profile_email_edit.setText(profile.email)
+
+        text_edit_birthday_edit.setText(formatDateBirthday(profile))
+
+        setDropdownGenreEditValue(profile.genre)
+        setDropdownEatingHabitEditValue(profile.eatingHabit)
+
+        setProfileType(profile.userType, true)
+
+        text_edit_height_edit.setText(profile.medicalHistory.height.toString())
+        text_edit_weight_edit.setText(profile.medicalHistory.weight.toString())
+
+        checkBox_chemicalAddict_edit.isChecked = profile.medicalHistory.drugAddict
+        checkBox_alcoholic_edit.isChecked = profile.medicalHistory.alcoholConsumption
+        checkBox_communicableDiseases_edit.isChecked = profile.medicalHistory.communicableDisease
+        checkBox_degenerativeDiseases_edit.isChecked = profile.medicalHistory.degenerativeDisease
+        checkBox_practicePhysicalActivities_edit.isChecked =
+            profile.medicalHistory.practicePhysicalActivity
+    }
+
+    private fun setDropdownEatingHabitEditValue(param: String) {
+        when (param) {
+            "Carnivoro" -> dropdown_eatingHabit_edit.setSelection(1)
+            "Vegetariano" -> dropdown_eatingHabit_edit.setSelection(2)
+            "Vegano" -> dropdown_eatingHabit_edit.setSelection(3)
+            "Outros" -> dropdown_eatingHabit_edit.setSelection(4)
+        }
+
+    }
+
+    private fun setDropdownGenreEditValue(param: String) {
+        when (param) {
+            "Feminino" -> dropdownGenre_edit.setSelection(1)
+            "Masculino" -> dropdownGenre_edit.setSelection(2)
+            "Outros" -> dropdownGenre_edit.setSelection(3)
         }
     }
 
@@ -251,7 +374,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         }
         return rotatedBitmap
     }
-
 
     private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         val matrix = Matrix()
@@ -380,7 +502,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun onChangePhotoClicked(buttonTakePhoto: ImageButton) {
+    private fun onChangePhotoClicked() {
         showDialogPhoto(mContext)
     }
 
@@ -413,17 +535,42 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             resources.getColor(R.color.dark_grey, null)
                         )
                     }
+                R.id.radioButton_donor_edit -> {
+                    if (checked) {
+                        radioButton_donor_edit.setTextColor(resources.getColor(R.color.white, null))
+                        radioButton_receiver_edit.setTextColor(
+                            resources.getColor(R.color.dark_grey, null)
+                        )
+                    }
+                }
+
                 R.id.radioButton_receiver ->
                     if (checked) {
                         radioButton_donor.setTextColor(resources.getColor(R.color.dark_grey, null))
                         radioButton_receiver.setTextColor(resources.getColor(R.color.white, null))
                     }
+
+                R.id.radioButton_receiver_edit -> {
+                    if (checked) {
+                        radioButton_donor_edit.setTextColor(
+                            resources.getColor(
+                                R.color.dark_grey,
+                                null
+                            )
+                        )
+                        radioButton_receiver_edit.setTextColor(
+                            resources.getColor(
+                                R.color.white,
+                                null
+                            )
+                        )
+                    }
+                }
             }
         }
     }
 
     private fun observe() {
-
         mViewModel.idUser.observe(viewLifecycleOwner, Observer {
             if (it != null && it > 0) {
                 mViewModel.getProfile(it)
@@ -439,6 +586,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             setVisibility(mScrollView)
         })
 
+        mViewModel.updateProfile.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                setProfileValues(it)
+            }
+            setVisibility(mScrollView)
+        })
+
         mViewModel.validation.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it.errorMessage(), Toast.LENGTH_SHORT).show()
         })
@@ -449,12 +603,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         text_name.text = profile.name
         text_email.text = profile.email
 
-        formatDateBirthday(profile)
+        text_date_birthday.text = formatDateBirthday(profile)
 
         text_genre.text = profile.genre
         text_eatingHabit.text = profile.eatingHabit
 
-        setProfileType(profile.userType)
+        setProfileType(profile.userType, false)
 
         text_weight.text = formatWeight(profile.medicalHistory.weight.toString())
         text_height.text = formatHeight(profile.medicalHistory.height.toString())
@@ -467,13 +621,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             profile.medicalHistory.practicePhysicalActivity
     }
 
-    private fun formatDateBirthday(profile: Profile) {
+    private fun formatDateBirthday(profile: Profile): String {
         val dateStr = profile.birthDate
         val date = SimpleDateFormat("yyyy-MM-dd").parse(dateStr)
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         sdf.timeZone = TimeZone.getTimeZone("CET")
-        val dateText = sdf.format(date)
-        text_date_birthday.text = dateText
+        return sdf.format(date)
     }
 
     private fun formatWeight(value: String): String = "$value kg"
@@ -481,21 +634,73 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private fun formatHeight(value: String): String = "$value m"
 
     private fun setListeners() {
+        button_open_edit.setOnClickListener(this)
+        btn_edit.setOnClickListener(this)
+        back_arrow_to_profile.setOnClickListener(this)
+
         button_take_photo.setOnClickListener(this)
+
         radioGroup_user_type.setOnClickListener(null)
         radioButton_donor.setOnClickListener(null)
-        radioButton_receiver.setOnClickListener(this)
+        radioButton_receiver.setOnClickListener(null)
+
+        radioGroup_user_type_edit.setOnClickListener(this)
+        radioButton_donor_edit.setOnClickListener(this)
+        radioButton_receiver_edit.setOnClickListener(this)
+
         btn_logout.setOnClickListener(this)
+
         removeClick()
     }
 
-    private fun setProfileType(value: String) {
-        if (value == "DOADOR") {
-            radioButton_donor.isChecked = true
-            onRadioButtonClicked(radioButton_donor)
+    private fun setProfileType(value: String, isEdit: Boolean) {
+        if (!isEdit) {
+            if (value == "DOADOR") {
+                radioButton_donor.isChecked = true
+                onRadioButtonClicked(radioButton_donor)
+            } else {
+                radioButton_receiver.isChecked = true
+                onRadioButtonClicked(radioButton_receiver)
+            }
         } else {
-            radioButton_receiver.isChecked = true
-            onRadioButtonClicked(radioButton_receiver)
+            if (value == "DOADOR") {
+                radioButton_donor_edit.isChecked = true
+                onRadioButtonClicked(radioButton_donor_edit)
+            } else {
+                radioButton_receiver_edit.isChecked = true
+                onRadioButtonClicked(radioButton_receiver_edit)
+            }
+        }
+
+    }
+
+    private fun setupSpinnerEatingHabit(view: View) {
+        val spinner = view.findViewById<Spinner>(R.id.dropdown_eatingHabit_edit)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.eating_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+    }
+
+    private fun setupSpinnerGenre(view: View) {
+        val spinner = view.findViewById<Spinner>(R.id.dropdownGenre_edit)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.genre_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
         }
     }
 

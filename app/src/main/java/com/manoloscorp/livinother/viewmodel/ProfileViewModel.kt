@@ -20,19 +20,22 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val mIdUser = MutableLiveData<Long>()
     var idUser: LiveData<Long> = mIdUser
 
+    private val mUpdateProfile = MutableLiveData<Profile>()
+    var updateProfile: LiveData<Profile> = mUpdateProfile
+
     private val mProfile = MutableLiveData<Profile>()
     var profile: LiveData<Profile> = mProfile
 
     private val mValidationListener = MutableLiveData<ValidationListener>()
     var validation: LiveData<ValidationListener> = mValidationListener
 
-    fun getUserId(){
+    fun getUserId() {
         val id = mSharedPreferences.getString(TOKEN_USER).toLong()
         mIdUser.value = id
     }
 
-    fun getProfile(id: Long){
-        mProfileRepository.getProfile(id, object : ApiListener<Profile>{
+    fun getProfile(id: Long) {
+        mProfileRepository.getProfile(id, object : ApiListener<Profile> {
             override fun onSuccess(param: Profile) {
                 mProfile.value = param
             }
@@ -42,6 +45,23 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             }
 
         })
+    }
+
+    fun updateProfile(id: Long, param: Profile) {
+        mProfileRepository.updateProfile(id, param, object : ApiListener<Profile> {
+            override fun onSuccess(param: Profile) {
+                mProfile.value = param
+            }
+
+            override fun onFailure(msg: String) {
+                mValidationListener.value = ValidationListener(msg)
+            }
+
+        })
+    }
+
+    fun getUserData(): Profile {
+        return mProfile.value!!
     }
 
     fun logout() {

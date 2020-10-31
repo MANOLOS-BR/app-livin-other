@@ -12,7 +12,7 @@
         android:id="@+id/scrollView_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -510,7 +510,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginVertical="4dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -547,8 +547,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_edit">
+            app:layout_constraintTop_toBottomOf="@+id/textView_edit"
+            app:layout_constraintVertical_bias="1.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -561,14 +563,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:layout_weight="1"
                     android:textColorHint="@color/white"
-                    app:hintTextAppearance="@style/MyHintStyle"
-                    app:layout_constraintBottom_toTopOf="@+id/text_input_layout_register_email"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/back_arrow"
-                    app:layout_constraintVertical_chainStyle="packed">
+                    app:hintTextAppearance="@style/MyHintStyle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/text_edit_user_edit"
@@ -582,20 +578,16 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_input_layout_register_email_edit"
+                    android:id="@+id/text_input_layout_profile_email_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:textColorHint="@color/white"
-                    app:hintTextAppearance="@style/MyHintStyle"
-                    app:layout_constraintBottom_toTopOf="@+id/text_input_layout_password"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_input_layout_user">
+                    app:hintTextAppearance="@style/MyHintStyle">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_edit_register_email_edit"
+                        android:id="@+id/text_edit_profile_email_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Email"
@@ -707,7 +699,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                 <TextView
                     android:id="@+id/lbl_user_type_edit"
                     android:layout_width="match_parent"
@@ -716,20 +707,14 @@
                     android:paddingHorizontal="16dp"
                     android:text="Você é um..."
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/radioGroup_user_type"
-                    app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
+                    android:textSize="18sp" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup_user_type_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/text_info_access"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lbl_user_type">
+                    android:paddingHorizontal="16dp">
 
                     <RadioButton
                         android:id="@+id/radioButton_donor_edit"
@@ -773,13 +758,13 @@
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:visibility="visible"
-                        app:layout_constraintBottom_toTopOf="@+id/dropdown_eatingHabit"
+                        app:layout_constraintBottom_toTopOf="@+id/dropdown_eatingHabit_edit"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Spinner
-                        android:id="@+id/dropdown_eatingHabit"
+                        android:id="@+id/dropdown_eatingHabit_edit"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -798,9 +783,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="4dp"
                         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        app:layout_constraintBottom_toBottomOf="@+id/dropdown_eatingHabit"
-                        app:layout_constraintEnd_toEndOf="@+id/dropdown_eatingHabit"
-                        app:layout_constraintTop_toTopOf="@+id/dropdown_eatingHabit" />
+                        app:layout_constraintBottom_toBottomOf="@+id/dropdown_eatingHabit_edit"
+                        app:layout_constraintEnd_toEndOf="@+id/dropdown_eatingHabit_edit"
+                        app:layout_constraintTop_toTopOf="@+id/dropdown_eatingHabit_edit" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -814,8 +799,7 @@
                     android:text="Informações sociais e clinicas"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@id/dropdown_eatingHabit" />
+                    android:visibility="visible" />
 
                 <CheckBox
                     android:id="@+id/checkBox_chemicalAddict_edit"
@@ -827,8 +811,7 @@
                     android:padding="8dp"
                     android:text="Dependente quimico"
                     android:textColor="@color/white"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@id/lbl_info_social_clinic" />
+                    android:visibility="visible" />
 
                 <CheckBox
                     android:id="@+id/checkBox_alcoholic_edit"
@@ -840,8 +823,7 @@
                     android:padding="8dp"
                     android:text="Consome bebidas alcoólicas"
                     android:textColor="@color/white"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox_chemicalAddict" />
+                    android:visibility="visible" />
 
                 <CheckBox
                     android:id="@+id/checkBox_communicableDiseases_edit"
@@ -853,8 +835,7 @@
                     android:padding="8dp"
                     android:text="Doenças transmissíveis"
                     android:textColor="@color/white"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox_alcoholic" />
+                    android:visibility="visible" />
 
                 <CheckBox
                     android:id="@+id/checkBox_degenerativeDiseases_edit"
@@ -866,11 +847,10 @@
                     android:padding="8dp"
                     android:text="Doenças degenerativas"
                     android:textColor="@color/white"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox_communicableDiseases" />
+                    android:visibility="visible" />
 
                 <CheckBox
-                    android:id="@+id/checkBox_practicePhysicalActivities"
+                    android:id="@+id/checkBox_practicePhysicalActivities_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
@@ -885,17 +865,12 @@
                     android:id="@+id/btn_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="16dp"
+                    android:layout_margin="24dp"
                     android:background="@drawable/shape_button_solid"
                     android:text="Editar"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/container_info_history"
-                    tools:layout_editor_absoluteX="16dp" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

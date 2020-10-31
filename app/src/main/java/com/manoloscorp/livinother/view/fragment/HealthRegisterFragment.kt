@@ -150,7 +150,7 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getUserType(): String {
-        return if (radioButton_donor.isSelected) {
+        return if (radioButton_donor.isChecked) {
             radioButton_donor.text.toString()
         } else {
             radioButton_receiver.text.toString()

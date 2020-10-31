@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-
         android:textColorHint="@color/white"
         app:hintTextAppearance="@style/MyHintStyle"
         app:layout_constraintBottom_toTopOf="@+id/text_input_layout_password"
