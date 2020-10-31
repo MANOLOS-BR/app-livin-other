@@ -102,6 +102,17 @@
                 android:background="@drawable/shape_card_profile"
                 android:padding="16dp">
 
+                <Button
+                    android:id="@+id/button_open_edit"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape_button_stroke"
+                    android:text="Editar"
+                    android:textColor="@color/patter_yellow"
+                    app:layout_constraintBottom_toTopOf="@+id/lbl_text_user_type"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/lbl_text_user_type"
                     android:layout_width="0dp"
@@ -114,7 +125,7 @@
                     app:layout_constraintBottom_toTopOf="@id/radioGroup_user_type"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/button_open_edit" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup_user_type"
