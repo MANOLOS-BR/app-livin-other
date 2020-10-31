@@ -40,4 +40,19 @@ class LivinOtherConstants private constructor() {
         const val CORNEA = "Córnea"
     }
 
+    object CAMERA {
+
+        const val URI_INSTANCE_STATE_KEY = "saved_uri";
+        const val REQUEST_CODE_TAKE_FROM_CAMERA = 0
+
+        // Different dialog IDs
+        const val DIALOG_ID_ERROR = -1
+        const val DIALOG_ID_PHOTO_PICKER = 1
+
+        // For photo picker selection:
+        const val ID_PHOTO_PICKER_FROM_CAMERA = 0
+
+        const val DIALOG_ID_KEY = "dialog_id"
+    }
+
 }

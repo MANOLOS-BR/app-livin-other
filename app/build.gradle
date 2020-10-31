@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.manoloscorp.livinother"
-        minSdkVersion 26
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -54,6 +54,8 @@ dependencies {
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
 
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

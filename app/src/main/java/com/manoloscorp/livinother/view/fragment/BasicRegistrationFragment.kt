@@ -2,6 +2,7 @@ package com.manoloscorp.livinother.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,8 +80,13 @@ class BasicRegistrationFragment : Fragment(), View.OnClickListener {
         if (name != null && name != "") {
             if (email != null && email != "") {
                 if (password != null && password != "") {
-                    mViewModel.setBasicRegister(name, email, password)
-                    mViewModel.setCurrentFragmentPosition(1)
+                    if (validateEmailFormat(email)) {
+                        mViewModel.setBasicRegister(name, email, password)
+                        mViewModel.setCurrentFragmentPosition(1)
+                    } else {
+                        Toast.makeText(context, "Digite um e-mail válido", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 } else {
                     Toast.makeText(context, "Preencha sua senha", Toast.LENGTH_SHORT).show()
                 }
@@ -91,5 +97,9 @@ class BasicRegistrationFragment : Fragment(), View.OnClickListener {
             Toast.makeText(context, "Preencha um nome para seu usuário", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    private fun validateEmailFormat(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

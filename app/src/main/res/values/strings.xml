@@ -31,7 +31,7 @@
     <string-array name="eating_array">
         <item>Selecione uma opção</item>
         <item>Carnivoro</item>
-        <item>Vegetáriano</item>
+        <item>Vegetariano</item>
         <item>Vegano</item>
         <item>Outros</item>
     </string-array>
@@ -46,7 +46,7 @@
     <string name="onboarding_slide2_subtitle">salve vidas</string>
     <string name="onboarding_slide2_article_one">UM DOADOR</string>
     <string name="onboarding_slide2_article_two">após a constatação de morte encefálica</string>
-    <string name="onboarding_slide2_article_three">É CAPAZ DE SALVAR MAIS DE VINTE PESSOAS</string>
+    <string name="onboarding_slide2_article_three">é capaz de salvar mais de vinte pessoas.</string>
 
     <string name="onboarding_slide3_title"></string>
     <string name="onboarding_slide3_subtitle">#DOEORGÃOS</string>
@@ -59,6 +59,14 @@
     <string name="get_started">Começar</string>
     <string name="text_title_faq">SAIBA\nMAIS\nSOBRE\nDOAÇÃO DE\nÓRGÃOS</string>
     <string name="default_name">User</string>
+    <string name="title_dialog_take_photo">Escolha sua foto de perfil</string>
+    <string name="camera_dialog_take_photo">Tirar uma foto da camera</string>
 
+    <string-array name="ui_profile_photo_picker_items">
+        <item>Tirar uma foto da camera</item>
+    </string-array>
 
+    <string name="profile_photo_file_name">profile_photo.png</string>
+    <string name="ui_profile_toast_save_text">Foto perfil alterada</string>
+    <string name="dialog_fragment_tag_photo_picker">dialog_fragment_photo_picker</string>
 </resources>

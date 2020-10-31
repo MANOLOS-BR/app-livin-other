@@ -17,13 +17,11 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
-
     <fragment
         android:id="@+id/navigation_faq"
         android:name="com.manoloscorp.livinother.view.fragment.FaqFragment"
         android:label="@string/title_faq"
         tools:layout="@layout/fragment_faq" />
-
 
     <fragment
         android:id="@+id/navigation_profile"

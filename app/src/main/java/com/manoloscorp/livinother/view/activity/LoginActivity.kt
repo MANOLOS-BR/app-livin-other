@@ -12,7 +12,6 @@ import com.manoloscorp.livinother.service.repository.local.SecurityPreferences
 import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_personal_register.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -23,7 +22,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // launch the onboarding screen if it is the first launch of the app
         if (isFirstLaunch()) {
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish()
@@ -31,11 +29,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         mViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        // Inicializa eventos
         setListeners()
         observe()
 
-        // Verifica se usuário está logado
         verifyLoggedUser()
 
     }
@@ -53,9 +49,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * Autentica usuário
-     */
     private fun handleLogin() {
         val email = text_edit_email.text.toString()
         val password = text_edit_password.text.toString()
@@ -77,9 +70,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * Observa ViewModel
-     */
     private fun observe() {
         mViewModel.login.observe(this, Observer {
             if (it.status()) {
@@ -95,23 +85,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             if (it) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-
             }
         })
     }
 
-    /**
-     * Inicializa os eventos de click
-     */
     private fun setListeners() {
         button_login.setOnClickListener(this)
         text_new_account.setOnClickListener(this)
         text_register.setOnClickListener(this)
     }
 
-    /**
-     * Verifica se usuário está logado
-     */
     private fun verifyLoggedUser() {
         mViewModel.verifyLoggedUser()
     }
