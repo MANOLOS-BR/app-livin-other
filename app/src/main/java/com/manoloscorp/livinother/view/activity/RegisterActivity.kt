@@ -15,7 +15,7 @@ import com.manoloscorp.livinother.view.fragment.HealthRegisterFragment
 import com.manoloscorp.livinother.view.fragment.PersonalRegisterFragment
 import com.manoloscorp.livinother.viewmodel.RegisterViewModel
 
-class RegisterActivity : AppCompatActivity(){
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var mViewModel: RegisterViewModel
 
@@ -46,22 +46,17 @@ class RegisterActivity : AppCompatActivity(){
     }
 
     private fun initViews() {
-        // Instantiate a ViewPager2 and a PagerAdapter.
         viewPager = findViewById(R.id.viewPager)
-
     }
 
-    /**
-     * Observa ViewModel
-     */
     private fun observe() {
         mViewModel.fragmentPosition.observe(this, Observer {
             viewPager.currentItem = it
         })
 
         mViewModel.dialog.observe(this, Observer {
-            if (it == true){
-                progressDialog.show(this,"Aguarde...")
+            if (it == true) {
+                progressDialog.show(this, getString(R.string.dialog_waiting))
             }
         })
 

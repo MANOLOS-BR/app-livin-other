@@ -59,14 +59,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun validationFields(email: String, password: String) {
         if (email != null && email != "") {
             if (password != null && password != "") {
-                progressDialog.show(this, "Aguarde...")
+                progressDialog.show(this, getString(R.string.dialog_waiting))
                 mViewModel.doLogin(email, password)
             } else {
-                Toast.makeText(applicationContext, "Preencha o campo senha", Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, getString(R.string.validate_password), Toast.LENGTH_SHORT)
                     .show()
             }
         } else {
-            Toast.makeText(applicationContext, "Preencha o campo e-mail", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, getString(R.string.validate_email), Toast.LENGTH_SHORT).show()
         }
     }
 

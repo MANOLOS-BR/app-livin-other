@@ -9,7 +9,7 @@ import com.manoloscorp.livinother.service.model.Faq
 import com.manoloscorp.livinother.view.viewholder.FaqItemViewHolder
 
 
-class FaqAdapter: RecyclerView.Adapter<FaqItemViewHolder>()  {
+class FaqAdapter : RecyclerView.Adapter<FaqItemViewHolder>() {
 
     private var mList: List<Faq> = listOf()
     private lateinit var mListener: FaqListener

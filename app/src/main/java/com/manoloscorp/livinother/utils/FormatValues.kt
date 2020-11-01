@@ -3,7 +3,6 @@ package com.manoloscorp.livinother.utils
 import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 open class FormatValues {
@@ -43,6 +42,10 @@ open class FormatValues {
             val format = SimpleDateFormat("dd/MM/yyy")
             return format.format(date)
         }
+
+        fun formatWeight(value: String): String = "$value kg"
+
+        fun formatHeight(value: String): String = "$value m"
     }
 
 

@@ -11,6 +11,8 @@ import com.manoloscorp.livinother.service.listener.ValidationListener
 import com.manoloscorp.livinother.service.model.Profile
 import com.manoloscorp.livinother.service.repository.ProfileRepository
 import com.manoloscorp.livinother.service.repository.local.SecurityPreferences
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -23,16 +25,21 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val mUpdateProfile = MutableLiveData<Profile>()
     var updateProfile: LiveData<Profile> = mUpdateProfile
 
+    private val mDeleteProfile = MutableLiveData<Boolean>()
+    var deleteProfile: LiveData<Boolean> = mDeleteProfile
+
     private val mProfile = MutableLiveData<Profile>()
     var profile: LiveData<Profile> = mProfile
 
     private val mValidationListener = MutableLiveData<ValidationListener>()
     var validation: LiveData<ValidationListener> = mValidationListener
 
-    fun getUserId() {
+    fun loadProfileUserId() {
         val id = mSharedPreferences.getString(TOKEN_USER).toLong()
         mIdUser.value = id
     }
+
+    fun getUserId(): Long = mSharedPreferences.getString(TOKEN_USER).toLong()
 
     fun getProfile(id: Long) {
         mProfileRepository.getProfile(id, object : ApiListener<Profile> {
@@ -51,6 +58,19 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         mProfileRepository.updateProfile(id, param, object : ApiListener<Profile> {
             override fun onSuccess(param: Profile) {
                 mProfile.value = param
+            }
+
+            override fun onFailure(msg: String) {
+                mValidationListener.value = ValidationListener(msg)
+            }
+
+        })
+    }
+
+    fun deleteProfile(id: Long) {
+        mProfileRepository.deleteProfile(id, object : ApiListener<Boolean> {
+            override fun onSuccess(param: Boolean) {
+                mDeleteProfile.value = param
             }
 
             override fun onFailure(msg: String) {

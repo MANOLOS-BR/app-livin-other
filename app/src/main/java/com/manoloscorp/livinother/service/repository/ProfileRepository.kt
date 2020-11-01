@@ -10,6 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class ProfileRepository(val context: Context) : BaseRepository(context) {
 
     private val mRemote = RetrofitClient.createService(ProfileService::class.java)
@@ -29,7 +30,6 @@ class ProfileRepository(val context: Context) : BaseRepository(context) {
                     response.body()?.let { listener.onSuccess(it) }
                 }
             }
-
         })
     }
 
@@ -48,7 +48,24 @@ class ProfileRepository(val context: Context) : BaseRepository(context) {
                     response.body()?.let { listener.onSuccess(it) }
                 }
             }
+        })
+    }
 
+    fun deleteProfile(id: Long, listener: ApiListener<Boolean>){
+        val call: Call<Unit> = mRemote.deleteProfile(id)
+
+        call.enqueue(object : Callback<Unit> {
+            override fun onFailure(call: Call<Unit>, t: Throwable) {
+                listener?.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
+            }
+
+            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                if (response.code() != LivinOtherConstants.HTTP.DELETE) {
+                    listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
+                } else {
+                    listener.onSuccess(response.isSuccessful)
+                }
+            }
         })
     }
 

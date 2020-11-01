@@ -95,12 +95,10 @@ class FaqFragment : Fragment() {
         mViewModel.validation.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it.errorMessage(), Toast.LENGTH_SHORT).show()
         })
-
     }
 
     override fun onResume() {
         super.onResume()
         mAdapter.attachListener(mListener)
     }
-
 }

@@ -17,18 +17,6 @@ class OnboardingFragment : Fragment() {
     companion object {
         val NAME = "name"
 
-        /**
-         * @param name a string to be displayed on the fragment
-         * @param listener click listener to pass click events to the activity
-         */
-//        fun newInstance(name: String, listener: OnBoardingListener): Fragment {
-//            val fragment = OnboardingFragment()
-//            val bundle = Bundle()
-//            bundle.putString(NAME, name)
-//            fragment.arguments = bundle
-//            fragment.onBoardingListener = listener
-//            return fragment
-//        }
         fun newInstance(name: String, listener: OnBoardingListener): Fragment {
             val fragment = OnboardingFragment()
             val bundle = Bundle()
@@ -54,7 +42,6 @@ class OnboardingFragment : Fragment() {
 
         tv_name.text = arguments?.getString(NAME, "")
 
-        // pass the click event to the activity
         tv_next.setOnClickListener {
             onBoardingListener.onNextClick()
         }

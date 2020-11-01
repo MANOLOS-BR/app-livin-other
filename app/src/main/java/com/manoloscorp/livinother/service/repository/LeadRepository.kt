@@ -26,7 +26,7 @@ class LeadRepository(val context: Context) : BaseRepository(context) {
 
             override fun onResponse(call: Call<Profile>, response: Response<Profile>) {
                 if (response.code() != LivinOtherConstants.HTTP.CREATED) {
-
+                    listener.onFailure(context.getString(R.string.ERROR_EXISTING_EMAIL))
                 } else {
                     response.body()?.let { listener.onSuccess(it) }
                 }

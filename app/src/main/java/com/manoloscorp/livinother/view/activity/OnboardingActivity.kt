@@ -14,7 +14,6 @@ import com.manoloscorp.livinother.view.adapter.SliderOnboardingAdapter
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
 class OnboardingActivity : AppCompatActivity() {
-//    https://github.com/topics/onboarding?l=kotlin
     private lateinit var sliderAdapter: SliderOnboardingAdapter
     private var dots: Array<TextView?>? = null
     private lateinit var layouts: Array<Int>
@@ -35,27 +34,25 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         override fun onPageScrollStateChanged(state: Int) {
-
         }
 
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
-
         init()
         dataSet()
         interactions()
     }
 
     private fun init() {
-        /** Layouts of the three onBoarding Screens.
-         *  Add more layouts if you wish.
-         **/
         layouts = arrayOf(
             R.layout.onboarding_slide1,
             R.layout.onboarding_slide2,
@@ -66,9 +63,6 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun dataSet() {
-        /**
-         * Adding bottom dots
-         * */
         addBottomDots(0)
 
         slider.apply {
@@ -79,26 +73,17 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun interactions() {
         skipBtn.setOnClickListener {
-            // Launch login screen
             navigateToLogin()
         }
         startBtn.setOnClickListener {
-            // Launch login screen
             navigateToLogin()
         }
         nextBtn.setOnClickListener {
-            /**
-             *  Checking for last page, if last page
-             *  login screen will be launched
-             * */
             val current = getCurrentScreen(+1)
             if (current < layouts.size) {
-                /**
-                 * Move to next screen
-                 * */
                 slider.currentItem = current
             } else {
-                // Launch login screen
+
                 navigateToLogin()
             }
         }

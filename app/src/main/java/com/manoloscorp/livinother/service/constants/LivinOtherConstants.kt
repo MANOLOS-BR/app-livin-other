@@ -18,6 +18,7 @@ class LivinOtherConstants private constructor() {
     object HTTP {
         const val SUCCESS = 200
         const val CREATED = 201
+        const val DELETE = 204
     }
 
     object RETROFIT {
@@ -41,7 +42,6 @@ class LivinOtherConstants private constructor() {
     }
 
     object CAMERA {
-
         const val URI_INSTANCE_STATE_KEY = "saved_uri";
         const val REQUEST_CODE_TAKE_FROM_CAMERA = 0
 
@@ -54,7 +54,5 @@ class LivinOtherConstants private constructor() {
 
         const val DIALOG_ID_KEY = "dialog_id"
     }
-
-
 
 }

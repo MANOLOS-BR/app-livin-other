@@ -16,10 +16,9 @@
     <string name="cadastre_se">Cadastre-se</string>
 
     <string name="ERROR_UNEXPECTED">Um erro inesperado ocorreu. Tente novamente mais tarde.</string>
+    <string name="ERROR_EXISTING_EMAIL">E-mail já cadastrado. Utilize outro e-mail.</string>
     <string name="ERROR_LOGIN">Não foi possível realizar login. Verifique os campos inseridos.</string>
     <string name="ERROR_INTERNET_CONNECTION">Conexão à internet necessária para uso da applicação.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="genre_array">
         <item>Selecione uma opção</item>
@@ -68,4 +67,30 @@
     <string name="profile_photo_file_name">profile_photo.png</string>
     <string name="ui_profile_toast_save_text">Foto perfil alterada</string>
     <string name="dialog_fragment_tag_photo_picker">dialog_fragment_photo_picker</string>
+    <string name="dialog_waiting">Aguarde...</string>
+
+    <string name="validate_password">Preencha o campo senha</string>
+    <string name="validate_email">Preencha o campo e-mail</string>
+    <string name="validate_valid_email">Digite um e-mail válido</string>
+    <string name="validade_username">Preencha um nome para seu usuário</string>
+    <string name="validate_eating_habit">Selecione um hábito alimentar</string>
+    <string name="validade_genre">Selecione seu gênero</string>
+    <string name="validate_weight">Preencha seu peso</string>
+    <string name="validate_height">Preencha sua altura</string>
+    <string name="validate_birthday">Preencha sua data de nascimento</string>
+    <string name="carnivore">Carnivoro</string>
+    <string name="vegetarian">Vegetariano</string>
+    <string name="vegan">Vegano</string>
+    <string name="others">Outros</string>
+    <string name="feminine">Feminino</string>
+    <string name="male">Masculino</string>
+    <string name="request_permission_message">Essa permissão é importante para o aplicativo.</string>
+    <string name="request_permission_title">É necessária uma permissão importante</string>
+    <string name="confirm">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="take_picture">Tirar uma foto</string>
+    <string name="choose_photo">Escolha sua foto de perfil</string>
+    <string name="account_successfully_deleted">Sua conta foi excluída com sucesso.</string>
+    <string name="error_account_deleted">Ocorreu um erro ao excluir sua conta. Tente novamente mais tarde</string>
+    <string name="donor">DOADOR</string>
 </resources>

@@ -492,11 +492,25 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_remove_user"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/container_info_history"
                     tools:layout_editor_absoluteX="16dp" />
+
+                <Button
+                    android:id="@+id/btn_remove_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:background="@color/transparent"
+                    android:text="Remover conta"
+                    android:textColor="@color/red"
+                    android:textSize="16sp"
+                    shimmer:layout_constraintBottom_toBottomOf="parent"
+                    shimmer:layout_constraintEnd_toEndOf="parent"
+                    shimmer:layout_constraintStart_toStartOf="parent"
+                    shimmer:layout_constraintTop_toBottomOf="@+id/btn_logout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -46,15 +46,12 @@ class PersonalRegisterFragment : Fragment(), View.OnClickListener {
 
     private fun setupSpinnerGenre(view: View) {
         val spinner = view.findViewById<Spinner>(R.id.dropdownGenre)
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.genre_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
     }
@@ -62,9 +59,7 @@ class PersonalRegisterFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
-
         DateInputMask(text_edit_birthday).listen()
-
     }
 
     private fun setListeners() {
@@ -72,9 +67,6 @@ class PersonalRegisterFragment : Fragment(), View.OnClickListener {
         button_next.setOnClickListener(this)
     }
 
-    /**
-     * Observa ViewModel
-     */
     private fun observe() {
         mViewModel.user.observe(requireActivity(), Observer {
             it
@@ -106,16 +98,16 @@ class PersonalRegisterFragment : Fragment(), View.OnClickListener {
                         mViewModel.setPersonalRegister(birthday, mHeigth, mWeight, genre)
                         mViewModel.setCurrentFragmentPosition(2)
                     } else {
-                        Toast.makeText(context, "Selecione seu gênero", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.validade_genre), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(context, "Preencha seu peso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.validate_weight), Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(context, "Preencha sua altura", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.validate_height), Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(context, "Preencha sua data de nascimento", Toast.LENGTH_SHORT)
+            Toast.makeText(context, getString(R.string.validate_birthday), Toast.LENGTH_SHORT)
                 .show()
         }
     }

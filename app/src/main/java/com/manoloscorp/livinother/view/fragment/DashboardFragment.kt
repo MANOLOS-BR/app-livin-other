@@ -29,7 +29,6 @@ class DashboardFragment : Fragment() {
 
     private lateinit var mShimmerLayout: ShimmerFrameLayout
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

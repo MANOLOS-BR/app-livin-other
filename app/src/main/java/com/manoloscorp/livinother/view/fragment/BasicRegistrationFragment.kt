@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_basic_registration.*
 
 class BasicRegistrationFragment : Fragment(), View.OnClickListener {
 
-
     private lateinit var mViewModel: RegisterViewModel
 
     companion object {
@@ -51,14 +50,10 @@ class BasicRegistrationFragment : Fragment(), View.OnClickListener {
         button_next.setOnClickListener(this)
     }
 
-    /**
-     * Observa ViewModel
-     */
     private fun observe() {
         mViewModel.user.observe(requireActivity(), Observer {
             it
         })
-
     }
 
     override fun onClick(view: View) {
@@ -84,17 +79,17 @@ class BasicRegistrationFragment : Fragment(), View.OnClickListener {
                         mViewModel.setBasicRegister(name, email, password)
                         mViewModel.setCurrentFragmentPosition(1)
                     } else {
-                        Toast.makeText(context, "Digite um e-mail válido", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, getString(R.string.validate_valid_email), Toast.LENGTH_SHORT)
                             .show()
                     }
                 } else {
-                    Toast.makeText(context, "Preencha sua senha", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.validate_password), Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(context, "Preencha seu e-mail", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.validate_email), Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(context, "Preencha um nome para seu usuário", Toast.LENGTH_SHORT)
+            Toast.makeText(context, getString(R.string.validade_username), Toast.LENGTH_SHORT)
                 .show()
         }
     }

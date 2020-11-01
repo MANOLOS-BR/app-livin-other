@@ -17,6 +17,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,16 +33,16 @@ import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.CAMERA.ID_PHOTO_PICKER_FROM_CAMERA
 import com.manoloscorp.livinother.service.constants.LivinOtherConstants.CAMERA.REQUEST_CODE_TAKE_FROM_CAMERA
 import com.manoloscorp.livinother.service.model.Profile
+import com.manoloscorp.livinother.utils.DateInputMask
 import com.manoloscorp.livinother.utils.FormatValues
+import com.manoloscorp.livinother.utils.FormatValues.Companion.formatHeight
+import com.manoloscorp.livinother.utils.FormatValues.Companion.formatWeight
 import com.manoloscorp.livinother.view.activity.LoginActivity
+import com.manoloscorp.livinother.view.dialogs.CustomProgressDialog
 import com.manoloscorp.livinother.viewmodel.ProfileViewModel
 import com.mikhaellopez.circularimageview.CircularImageView
 import com.soundcloud.android.crop.Crop
-import kotlinx.android.synthetic.main.fragment_health_register.*
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.radioButton_donor
-import kotlinx.android.synthetic.main.fragment_profile.radioButton_receiver
-import kotlinx.android.synthetic.main.fragment_profile.radioGroup_user_type
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -56,6 +57,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private lateinit var mContext: Context
 
     private lateinit var mShimmerLayout: ShimmerFrameLayout
+    private val progressDialog = CustomProgressDialog()
+
     private lateinit var mScrollView: ScrollView
     private lateinit var mEditProfile: ConstraintLayout
     private lateinit var mImageView: CircularImageView
@@ -88,7 +91,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
         mShimmerLayout.startShimmerAnimation()
 
-        mViewModel.getUserId()
+        mViewModel.loadProfileUserId()
 
         return root
     }
@@ -122,6 +125,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
+        DateInputMask(text_edit_birthday_edit).listen()
     }
 
     override fun onClick(view: View) {
@@ -131,10 +135,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_logout -> {
-                mViewModel.logout()
-
-                startActivity(Intent(context, LoginActivity::class.java))
-                activity?.finish()
+                logoutApplication()
             }
 
             R.id.button_open_edit -> {
@@ -148,8 +149,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_edit -> {
-                val user = getUserEditValues(mViewModel.getUserData())
-                mViewModel.updateProfile(1, user)
+                validadeFieldsBefore()
             }
 
             R.id.radioButton_donor_edit -> {
@@ -163,7 +163,70 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 mEditProfile.visibility = View.GONE
                 mScrollView.visibility = View.VISIBLE
             }
+
+            R.id.btn_remove_user -> {
+                progressDialog.show(mContext, getString(R.string.dialog_waiting))
+                mViewModel.deleteProfile(mViewModel.getUserId())
+            }
         }
+    }
+
+    private fun validadeFieldsBefore() {
+        if (text_edit_user_edit.text.toString() != null && text_edit_user_edit.text.toString() != "") {
+            if (text_edit_profile_email_edit.text.toString() != null && text_edit_profile_email_edit.text.toString() != "") {
+                if (validateEmailFormat(text_edit_profile_email_edit.text.toString())) {
+                    if (text_edit_birthday_edit.text.toString() != null && text_edit_birthday_edit.text.toString() != "") {
+                        if (text_edit_height_edit.text.toString() != null && text_edit_height_edit.text.toString() != "") {
+                            if (text_edit_weight_edit.text.toString() != null && text_edit_weight_edit.text.toString() != "") {
+                                if (dropdownGenre_edit.selectedItem.toString() != null && dropdownGenre_edit.selectedItem.toString() != "" && dropdownGenre_edit.adapter.getItem(0) != dropdownGenre_edit.selectedItem.toString()) {
+                                    if (dropdown_eatingHabit_edit.selectedItem.toString() != null && dropdown_eatingHabit_edit.selectedItem.toString() != "" && dropdown_eatingHabit_edit.adapter.getItem(
+                                            0
+                                        ) != dropdown_eatingHabit_edit.selectedItem.toString()
+                                    ) {
+
+                                        callUpdateProfile()
+
+                                    } else {
+                                        Toast.makeText(context, getString(R.string.validate_eating_habit), Toast.LENGTH_SHORT).show()
+                                    }
+                                } else {
+                                    Toast.makeText(context, getString(R.string.validade_genre), Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(context, getString(R.string.validate_weight), Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(context, getString(R.string.validate_height), Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(context, getString(R.string.validate_birthday), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                } else {
+                    Toast.makeText(context, getString(R.string.validate_valid_email), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(context, getString(R.string.validate_email), Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(context, getString(R.string.validade_username), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun validateEmailFormat(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun callUpdateProfile() {
+        val user = getUserEditValues(mViewModel.getUserData())
+        mViewModel.updateProfile(mViewModel.getUserId(), user)
+    }
+
+    private fun logoutApplication() {
+        mViewModel.logout()
+
+        startActivity(Intent(context, LoginActivity::class.java))
+        activity?.finish()
     }
 
     private fun getUserEditValues(userData: Profile): Profile {
@@ -198,12 +261,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         } else {
             radioButton_receiver_edit.text.toString()
         }
-
-//        return if (radioButton_donor.isSelected) {
-//            radioButton_donor.text.toString()
-//        } else {
-//            radioButton_receiver.text.toString()
-//        }
     }
 
     private fun formatDateBirthdayToService(): String {
@@ -215,7 +272,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         text_edit_user_edit.setText(profile.name)
         text_edit_profile_email_edit.setText(profile.email)
 
-        text_edit_birthday_edit.setText(formatDateBirthday(profile))
+        text_edit_birthday_edit.setText(formatDateBirthdayToApp(profile))
 
         setDropdownGenreEditValue(profile.genre)
         setDropdownEatingHabitEditValue(profile.eatingHabit)
@@ -235,19 +292,18 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private fun setDropdownEatingHabitEditValue(param: String) {
         when (param) {
-            "Carnivoro" -> dropdown_eatingHabit_edit.setSelection(1)
-            "Vegetariano" -> dropdown_eatingHabit_edit.setSelection(2)
-            "Vegano" -> dropdown_eatingHabit_edit.setSelection(3)
-            "Outros" -> dropdown_eatingHabit_edit.setSelection(4)
+            getString(R.string.carnivore) -> dropdown_eatingHabit_edit.setSelection(1)
+            getString(R.string.vegetarian) -> dropdown_eatingHabit_edit.setSelection(2)
+            getString(R.string.vegan) -> dropdown_eatingHabit_edit.setSelection(3)
+            getString(R.string.others) -> dropdown_eatingHabit_edit.setSelection(4)
         }
-
     }
 
     private fun setDropdownGenreEditValue(param: String) {
         when (param) {
-            "Feminino" -> dropdownGenre_edit.setSelection(1)
-            "Masculino" -> dropdownGenre_edit.setSelection(2)
-            "Outros" -> dropdownGenre_edit.setSelection(3)
+            getString(R.string.feminine) -> dropdownGenre_edit.setSelection(1)
+            getString(R.string.male) -> dropdownGenre_edit.setSelection(2)
+            getString(R.string.others) -> dropdownGenre_edit.setSelection(3)
         }
     }
 
@@ -280,10 +336,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 ) {
                     val builder =
                         AlertDialog.Builder(mContext)
-                    builder.setMessage("Essa permissão é importante para o aplicativo.")
-                        .setTitle("É necessária uma permissão importante")
+                    builder.setMessage(getString(R.string.request_permission_message))
+                        .setTitle(getString(R.string.request_permission_title))
                     builder.setPositiveButton(
-                        "OK"
+                        getString(R.string.confirm)
                     ) { dialog, id ->
                         requestPermissions(
                             arrayOf(
@@ -391,7 +447,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 BuildConfig.APPLICATION_ID,
                 photoFile!!
             )
-            Log.d("URI: ", destination.toString())
             Crop.of(source, destination).asSquare().start(mContext, this)
         }
     }
@@ -447,17 +502,17 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private fun showDialogPhoto(context: Context) {
         val options =
-            arrayOf<CharSequence>("Tirar uma foto", "Cancelar")
+            arrayOf<CharSequence>(getString(R.string.take_picture), getString(R.string.cancel))
 
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Escolha sua foto de perfil")
+        builder.setTitle(getString(R.string.choose_photo))
 
         builder.setItems(options) { dialog, item ->
             when {
-                options[item] == "Tirar uma foto" -> {
+                options[item] == getString(R.string.take_picture) -> {
                     onPhotoPickerItemSelected(item)
                 }
-                options[item] == "Cancelar" -> {
+                options[item] == getString(R.string.cancel)-> {
                     dialog.dismiss()
                 }
             }
@@ -581,7 +636,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             if (it != null) {
                 setProfileValues(it)
             }
-
             mShimmerLayout.stopShimmerAnimation()
             setVisibility(mScrollView)
         })
@@ -591,6 +645,21 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 setProfileValues(it)
             }
             setVisibility(mScrollView)
+        })
+
+        mViewModel.deleteProfile.observe(viewLifecycleOwner, Observer {
+            if (it != null && it == true) {
+                Toast.makeText(context, getString(R.string.account_successfully_deleted), Toast.LENGTH_SHORT)
+                    .show()
+                logoutApplication()
+            } else {
+                Toast.makeText(
+                    context,
+                    getString(R.string.error_account_deleted),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            progressDialog.dialog.dismiss()
         })
 
         mViewModel.validation.observe(viewLifecycleOwner, Observer {
@@ -603,7 +672,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         text_name.text = profile.name
         text_email.text = profile.email
 
-        text_date_birthday.text = formatDateBirthday(profile)
+        text_date_birthday.text = formatDateBirthdayToApp(profile)
 
         text_genre.text = profile.genre
         text_eatingHabit.text = profile.eatingHabit
@@ -621,17 +690,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             profile.medicalHistory.practicePhysicalActivity
     }
 
-    private fun formatDateBirthday(profile: Profile): String {
+    private fun formatDateBirthdayToApp(profile: Profile): String {
         val dateStr = profile.birthDate
         val date = SimpleDateFormat("yyyy-MM-dd").parse(dateStr)
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         sdf.timeZone = TimeZone.getTimeZone("CET")
         return sdf.format(date)
     }
-
-    private fun formatWeight(value: String): String = "$value kg"
-
-    private fun formatHeight(value: String): String = "$value m"
 
     private fun setListeners() {
         button_open_edit.setOnClickListener(this)
@@ -649,13 +714,14 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         radioButton_receiver_edit.setOnClickListener(this)
 
         btn_logout.setOnClickListener(this)
+        btn_remove_user.setOnClickListener(this)
 
         removeClick()
     }
 
     private fun setProfileType(value: String, isEdit: Boolean) {
         if (!isEdit) {
-            if (value == "DOADOR") {
+            if (value == getString(R.string.donor)) {
                 radioButton_donor.isChecked = true
                 onRadioButtonClicked(radioButton_donor)
             } else {
@@ -663,7 +729,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 onRadioButtonClicked(radioButton_receiver)
             }
         } else {
-            if (value == "DOADOR") {
+            if (value == getString(R.string.donor)) {
                 radioButton_donor_edit.isChecked = true
                 onRadioButtonClicked(radioButton_donor_edit)
             } else {
@@ -671,37 +737,29 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 onRadioButtonClicked(radioButton_receiver_edit)
             }
         }
-
     }
 
     private fun setupSpinnerEatingHabit(view: View) {
         val spinner = view.findViewById<Spinner>(R.id.dropdown_eatingHabit_edit)
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.eating_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
     }
 
     private fun setupSpinnerGenre(view: View) {
         val spinner = view.findViewById<Spinner>(R.id.dropdownGenre_edit)
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.genre_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
     }
-
 }

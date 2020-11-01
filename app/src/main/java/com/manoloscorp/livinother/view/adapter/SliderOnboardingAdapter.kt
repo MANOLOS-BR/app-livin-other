@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 
-class SliderOnboardingAdapter(private val context: Context, private val layouts: Array<Int>) : PagerAdapter() {
+class SliderOnboardingAdapter(private val context: Context, private val layouts: Array<Int>) :
+    PagerAdapter() {
 
     private lateinit var layoutInflater: LayoutInflater
 

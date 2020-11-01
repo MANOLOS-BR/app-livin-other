@@ -15,7 +15,6 @@ import com.manoloscorp.livinother.R
 import com.manoloscorp.livinother.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_health_register.*
 
-
 class HealthRegisterFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mViewModel: RegisterViewModel
@@ -44,12 +43,9 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
     }
 
     private fun onRadioButtonClicked(view: View) {
-
         if (view is RadioButton) {
-            // Is the button now checked?
             val checked = view.isChecked
 
-            // Check which radio button was clicked
             when (view.getId()) {
                 R.id.radioButton_donor ->
                     if (checked) {
@@ -69,15 +65,12 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
 
     private fun setupSpinnerEatingHabit(view: View) {
         val spinner = view.findViewById<Spinner>(R.id.dropdown_eatingHabit)
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.eating_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
     }
@@ -87,9 +80,6 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
         setListeners()
     }
 
-    /**
-     * Observa ViewModel
-     */
     private fun observe() {
         mViewModel.user.observe(requireActivity(), Observer {
             it
@@ -103,7 +93,6 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
         back_arrow.setOnClickListener(this)
         button_finish.setOnClickListener(this)
     }
-
 
     override fun onClick(view: View) {
         when (view.id) {
@@ -142,7 +131,11 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
                         practicePhysicalActivities
                     )
                 } else {
-                    Toast.makeText(context, "Selecione um hábito alimentar", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        context,
+                        getString(R.string.validate_eating_habit),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
@@ -156,6 +149,4 @@ class HealthRegisterFragment : Fragment(), View.OnClickListener {
             radioButton_receiver.text.toString()
         }
     }
-
-
 }

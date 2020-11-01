@@ -15,7 +15,6 @@ class AuthRepository(val context: Context) : BaseRepository(context) {
 
     private var mRemote = RetrofitClient.createService(AuthService::class.java)
 
-
     fun login(body: Authentication, listener: ApiListener<Header>) {
 
         if (!isConnectionAvailable(context)) {
@@ -32,9 +31,6 @@ class AuthRepository(val context: Context) : BaseRepository(context) {
 
             override fun onResponse(call: Call<Header>, response: Response<Header>) {
                 if (response.code() != SUCCESS) {
-//                    val validation = Gson().fromJson(response.errorBody()?.let { toString() }, String::class.java)
-//                    listener.onFailure(validation)
-
                     listener.onFailure(context.getString(R.string.ERROR_LOGIN))
                 } else {
                     response.body()?.let { listener.onSuccess(it) }

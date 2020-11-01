@@ -2,10 +2,7 @@ package com.manoloscorp.livinother.service.repository.remote
 
 import com.manoloscorp.livinother.service.model.Profile
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PUT
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface ProfileService {
@@ -20,4 +17,8 @@ interface ProfileService {
         @Path(value = "id", encoded = true) id: Long, @Body param: Profile
     ): Call<Profile>
 
+    @DELETE("/api/profile/{id}")
+    fun deleteProfile(
+        @Path(value = "id", encoded = true) id: Long
+    ):  Call<Unit>
 }
